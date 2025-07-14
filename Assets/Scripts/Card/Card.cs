@@ -46,7 +46,7 @@ public class Card : MonoBehaviour
 
     internal void CardMatched()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, Constants.TimeBeforeDestruction);
     }
 
     internal void CardNotmatching()
