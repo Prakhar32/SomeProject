@@ -44,14 +44,18 @@ public class CardTests
         Assert.IsTrue(card == null);
     }
 
-    private Card ConvertGameobjectIntoCard(GameObject g)
+    [UnityTest]
+    public IEnumerator CardMatcher_NotSet()
     {
+        LogAssert.ignoreFailingMessages = true;
+        GameObject g = new GameObject();
         Card card = g.AddComponent<Card>();
         card.FaceUpSprite = HelperMethods.createSpriteStub();
         card.FaceDownSprite = HelperMethods.createSpriteStub();
-
         g.AddComponent<Image>();
-        return card;
+
+        yield return null;
+        Assert.IsTrue(card == null);
     }
 
     [UnityTest]
@@ -59,7 +63,8 @@ public class CardTests
     {
         //Given
         GameObject g = new GameObject();
-        Card card = ConvertGameobjectIntoCard(g);
+        Card card = HelperMethods.ConvertGameobjectIntoCard(g);
+        card.CardMatcher = new CardMatcher();
         yield return null;
 
         //Then
@@ -71,7 +76,8 @@ public class CardTests
     {
         //Given
         GameObject g = new GameObject();
-        Card card = ConvertGameobjectIntoCard(g);
+        Card card = HelperMethods.ConvertGameobjectIntoCard(g);
+        card.CardMatcher = new CardMatcher();
         yield return null;
 
         //When

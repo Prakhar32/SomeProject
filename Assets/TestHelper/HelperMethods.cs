@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HelperMethods
 {
@@ -19,5 +20,15 @@ public class HelperMethods
     {
         Sprite sprite = Sprite.Create(createTexture(), new Rect(0, 0, 2, 2), Vector2.zero);
         return sprite;
+    }
+
+    public static Card ConvertGameobjectIntoCard(GameObject g)
+    {
+        Card card = g.AddComponent<Card>();
+        card.FaceUpSprite = HelperMethods.createSpriteStub();
+        card.FaceDownSprite = HelperMethods.createSpriteStub();
+
+        g.AddComponent<Image>();
+        return card;
     }
 }

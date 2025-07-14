@@ -5,18 +5,27 @@ public class Card : MonoBehaviour
 {
     public Sprite FaceUpSprite;
     public Sprite FaceDownSprite;
+    public CardMatcher CardMatcher;
 
     private Image _image;
 
     void Start()
     {
-        if(FaceUpSprite == null)
+        checkDependencies();
+
+        _image = GetComponent<Image>();
+        _image.sprite = FaceDownSprite;
+    }
+
+    private void checkDependencies()
+    {
+        if (FaceUpSprite == null)
         {
             Destroy(this);
             throw new MissingReferenceException("FaceUpSprite is not assigned in the Card component.");
         }
 
-        if(FaceDownSprite == null)
+        if (FaceDownSprite == null)
         {
             Destroy(this);
             throw new MissingReferenceException("FaceDownSprite is not assigned in the Card component.");
@@ -28,12 +37,26 @@ public class Card : MonoBehaviour
             throw new MissingComponentException("Image component is missing on the GameObject.");
         }
 
-        _image = GetComponent<Image>();
+        if (CardMatcher == null)
+        {
+            Destroy(this);
+            throw new MissingReferenceException("CardMatcher is not assigned in the Card component.");
+        }
+    }
+
+    internal void CardMatched()
+    {
+        Destroy(gameObject);
+    }
+
+    internal void CardNotmatching()
+    {
         _image.sprite = FaceDownSprite;
     }
 
     public void Selected()
     {
         _image.sprite = FaceUpSprite;
+        CardMatcher.CardSelected(this); 
     }
 }
