@@ -54,4 +54,15 @@ internal class CardStateMachine
             _currentState = _pauseBeforeResetState;
         _currentState.OnEnterState();
     }
+
+    internal CardMemeto SaveState()
+    {
+        return new CardMemeto(_currentState);
+    }
+
+    internal void LoadState(CardMemeto memeto)
+    {
+        _currentState = memeto.GetState();
+        _currentState.OnEnterState();
+    }
 }

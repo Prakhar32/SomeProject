@@ -60,7 +60,7 @@ public class CardView : MonoBehaviour, ISelected
         stateMachine.Selected();
     }
 
-    internal  void FaceUpCard() 
+    internal void FaceUpCard() 
     { 
         _image.sprite = FaceUpSprite;
     }
@@ -73,5 +73,15 @@ public class CardView : MonoBehaviour, ISelected
     internal void DisableView()
     {
         gameObject.SetActive(false);
+    }
+
+    public CardMemeto SaveState()
+    {
+        return stateMachine.SaveState();
+    }
+
+    public void LoadState(CardMemeto memeto)
+    {
+        stateMachine.LoadState(memeto);
     }
 }

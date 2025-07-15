@@ -86,4 +86,22 @@ public class CardTests
         //Then
         Assert.IsTrue(g.GetComponent<Image>().sprite == g.GetComponent<CardView>().FaceUpSprite);
     }
+
+    [UnityTest]
+    public IEnumerator StateRestoredOnLoadingMemento()
+    {
+        //Given
+        GameObject g = new GameObject();
+        CardView card = HelperMethods.ConvertGameobjectIntoCard(g);
+        card.CardMatcher = new CardMatcher();
+        yield return null;
+
+        //When
+        CardMemeto memento = card.SaveState();
+        card.Selected();
+        card.LoadState(memento);
+
+        //Then
+        Assert.IsTrue(g.GetComponent<Image>().sprite == card.FaceDownSprite);
+    }
 }
