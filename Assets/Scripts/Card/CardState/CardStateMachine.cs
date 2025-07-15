@@ -10,10 +10,10 @@ internal class CardStateMachine
     internal CardState SelectedState { get; private set; }
     internal CardState UnselectedState { get; private set; }
 
-    private CardState _pauseState;
+    private CardState _pauseBeforeDestructionState;
+    private CardState _pauseBeforeResetState;
     private CardState _currentState;
     private CardView _card;
-    internal bool HasMatched { get; private set; } = false;
 
     internal CardStateMachine(CardView card, CardMatcher cardMatcher)
     {
@@ -26,7 +26,9 @@ internal class CardStateMachine
     {
         UnselectedState = new UnselectedState(this, CardMatcher, _card);
         SelectedState = new SelectedState(_card);
-        _pauseState = new PauseState(this, _card, _card);
+        _pauseBeforeDestructionState = new PauseBeforeDestructionState(_card, _card);
+        _pauseBeforeResetState = new PauseBeforeResetState(this, _card);
+
         _currentState = UnselectedState;
         _currentState.OnEnterState();
     }
@@ -44,7 +46,10 @@ internal class CardStateMachine
 
     internal void Evaluation(bool result)
     {
-        HasMatched = result;
-        SetState(_pauseState);
+        if(result)
+            _currentState = _pauseBeforeDestructionState;
+        else
+            _currentState = _pauseBeforeResetState;
+        _currentState.OnEnterState();
     }
 }
