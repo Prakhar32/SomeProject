@@ -2,8 +2,8 @@ using UnityEngine.UI;
 
 internal class SelectedState : CardState
 {
-    private Card _card;
-    internal SelectedState(Card card)
+    private CardView _card;
+    internal SelectedState(CardView card)
     {
         _card = card;
     }

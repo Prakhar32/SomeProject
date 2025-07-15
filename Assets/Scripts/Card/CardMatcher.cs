@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class CardMatcher 
 {
-    private Card _previousCard;
+    private CardView _previousCard;
     private bool Evaluate(Sprite card1, Sprite card2)
     {
         return card1 == card2;
     }
 
-    internal void CardSelected(Card card)
+    internal void CardSelected(CardView card)
     {
         if(_previousCard == null)
         {

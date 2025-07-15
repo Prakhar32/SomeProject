@@ -2,9 +2,9 @@ internal class UnselectedState : CardState
 {
     private CardStateMachine _cardStateMachine;
     private CardMatcher _matcher;
-    private Card _card;
+    private CardView _card;
 
-    internal UnselectedState(CardStateMachine cardStateMachine, CardMatcher cardMatcher, Card card)
+    internal UnselectedState(CardStateMachine cardStateMachine, CardMatcher cardMatcher, CardView card)
     {
         _cardStateMachine = cardStateMachine;
         _matcher = cardMatcher;

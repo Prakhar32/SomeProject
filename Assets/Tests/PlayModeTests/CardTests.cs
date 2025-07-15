@@ -12,7 +12,7 @@ public class CardTests
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
 
-        Card card = g.AddComponent<Card>();
+        CardView card = g.AddComponent<CardView>();
         card.FaceUpSprite = HelperMethods.createSpriteStub();
         yield return null;
         
@@ -24,7 +24,7 @@ public class CardTests
     {
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
-        Card card = g.AddComponent<Card>();
+        CardView card = g.AddComponent<CardView>();
         g.AddComponent<Image>();
 
         yield return null;
@@ -36,7 +36,7 @@ public class CardTests
     {
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
-        Card card = g.AddComponent<Card>();
+        CardView card = g.AddComponent<CardView>();
         card.FaceUpSprite = HelperMethods.createSpriteStub();
         g.AddComponent<Image>();
 
@@ -49,7 +49,7 @@ public class CardTests
     {
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
-        Card card = g.AddComponent<Card>();
+        CardView card = g.AddComponent<CardView>();
         card.FaceUpSprite = HelperMethods.createSpriteStub();
         card.FaceDownSprite = HelperMethods.createSpriteStub();
         g.AddComponent<Image>();
@@ -63,7 +63,7 @@ public class CardTests
     {
         //Given
         GameObject g = new GameObject();
-        Card card = HelperMethods.ConvertGameobjectIntoCard(g);
+        CardView card = HelperMethods.ConvertGameobjectIntoCard(g);
         card.CardMatcher = new CardMatcher();
         yield return null;
 
@@ -76,7 +76,7 @@ public class CardTests
     {
         //Given
         GameObject g = new GameObject();
-        Card card = HelperMethods.ConvertGameobjectIntoCard(g);
+        CardView card = HelperMethods.ConvertGameobjectIntoCard(g);
         card.CardMatcher = new CardMatcher();
         yield return null;
 
@@ -84,6 +84,6 @@ public class CardTests
         card.Selected();
 
         //Then
-        Assert.IsTrue(g.GetComponent<Image>().sprite == g.GetComponent<Card>().FaceUpSprite);
+        Assert.IsTrue(g.GetComponent<Image>().sprite == g.GetComponent<CardView>().FaceUpSprite);
     }
 }

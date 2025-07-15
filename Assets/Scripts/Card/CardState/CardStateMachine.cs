@@ -12,10 +12,10 @@ internal class CardStateMachine
 
     private CardState _pauseState;
     private CardState _currentState;
-    private Card _card;
+    private CardView _card;
     internal bool HasMatched { get; private set; } = false;
 
-    internal CardStateMachine(Card card, CardMatcher cardMatcher)
+    internal CardStateMachine(CardView card, CardMatcher cardMatcher)
     {
         _card = card;
         CardMatcher = cardMatcher;

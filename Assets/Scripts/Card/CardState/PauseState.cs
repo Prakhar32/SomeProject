@@ -4,11 +4,11 @@ using UnityEngine;
 
 internal class PauseState : CardState
 {
-    private Card _card;
+    private CardView _card;
     private MonoBehaviour _mono;
     private CardStateMachine _cardStateMachine;
 
-    internal PauseState(CardStateMachine cardStateMachine, Card card, MonoBehaviour mono)
+    internal PauseState(CardStateMachine cardStateMachine, CardView card, MonoBehaviour mono)
     {
         _card = card;
         _mono = mono;

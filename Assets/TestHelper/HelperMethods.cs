@@ -22,9 +22,9 @@ public class HelperMethods
         return sprite;
     }
 
-    public static Card ConvertGameobjectIntoCard(GameObject g)
+    public static CardView ConvertGameobjectIntoCard(GameObject g)
     {
-        Card card = g.AddComponent<Card>();
+        CardView card = g.AddComponent<CardView>();
         card.FaceUpSprite = HelperMethods.createSpriteStub();
         card.FaceDownSprite = HelperMethods.createSpriteStub();
 

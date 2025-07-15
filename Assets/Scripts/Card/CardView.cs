@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Card : MonoBehaviour, ISelected
+public class CardView : MonoBehaviour, ISelected
 {
     public Sprite FaceUpSprite;
     public Sprite FaceDownSprite;
