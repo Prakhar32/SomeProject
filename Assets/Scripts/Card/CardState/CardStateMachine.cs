@@ -9,6 +9,7 @@ internal class CardStateMachine
 
     internal CardState SelectedState { get; private set; }
     internal CardState UnselectedState { get; private set; }
+    internal CardState DisabledState { get; private set; }
 
     private CardState _pauseBeforeDestructionState;
     private CardState _pauseBeforeResetState;
@@ -26,7 +27,8 @@ internal class CardStateMachine
     {
         UnselectedState = new UnselectedState(this, CardMatcher, _card);
         SelectedState = new SelectedState(_card);
-        _pauseBeforeDestructionState = new PauseBeforeDestructionState(_card, _card);
+        DisabledState = new DisabledState(_card);
+        _pauseBeforeDestructionState = new PauseBeforeDestructionState(this, _card);
         _pauseBeforeResetState = new PauseBeforeResetState(this, _card);
 
         _currentState = UnselectedState;

@@ -70,8 +70,8 @@ public class CardView : MonoBehaviour, ISelected
         _image.sprite = FaceDownSprite;
     }
 
-    internal void Destroy()
+    internal void DisableView()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

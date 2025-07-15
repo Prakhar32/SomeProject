@@ -3,12 +3,12 @@ using UnityEngine;
 
 internal class PauseBeforeDestructionState : CardState
 {
-    private CardView _card;
+    private CardStateMachine _stateMachine;
     private MonoBehaviour _mono;
 
-    internal PauseBeforeDestructionState(CardView card, MonoBehaviour mono)
+    internal PauseBeforeDestructionState(CardStateMachine stateMachine, MonoBehaviour mono)
     {
-        _card = card;
+        _stateMachine = stateMachine;
         _mono = mono;
     }
 
@@ -24,6 +24,6 @@ internal class PauseBeforeDestructionState : CardState
     private IEnumerator PauseBeforeDestruction()
     {
         yield return new WaitForSeconds(Constants.TimeBeforeDestruction);
-        _card.Destroy();
+        _stateMachine.SetState(_stateMachine.DisabledState);
     }
 }

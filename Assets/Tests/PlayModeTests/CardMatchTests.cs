@@ -31,8 +31,8 @@ public class CardMatchTests
 
         //Then
         yield return new WaitForSeconds(Constants.TimeBeforeDestruction);
-        Assert.IsTrue(card1 == null);
-        Assert.IsTrue(card2 == null);
+        Assert.IsFalse(g1.activeSelf);
+        Assert.IsFalse(g2.activeSelf);
     }
 
     [UnityTest]
@@ -58,12 +58,12 @@ public class CardMatchTests
 
         //Then
         yield return null;
-        Assert.IsFalse(card1 == null);
-        Assert.IsFalse(card2 == null);  
+        Assert.IsTrue(g1.activeSelf);
+        Assert.IsTrue(g2.activeSelf);  
 
         yield return new WaitForSeconds(Constants.TimeBeforeDestruction);
-        Assert.IsTrue(card1 == null);
-        Assert.IsTrue(card2 == null);
+        Assert.IsFalse(g1.activeSelf);
+        Assert.IsFalse(g2.activeSelf);
     }
 
     [UnityTest]
