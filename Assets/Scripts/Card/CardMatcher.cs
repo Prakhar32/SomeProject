@@ -5,7 +5,7 @@ using UnityEngine;
 public class CardMatcher 
 {
     private Card _previousCard;
-    public bool Evaluate(Sprite card1, Sprite card2)
+    private bool Evaluate(Sprite card1, Sprite card2)
     {
         return card1 == card2;
     }

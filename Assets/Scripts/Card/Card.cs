@@ -8,20 +8,14 @@ public class Card : MonoBehaviour, ISelected
     public CardMatcher CardMatcher;
     private Image _image;
 
-    internal CardState SelectedState;
-    internal CardState UnselectedState;
-    
-    private CardState _pauseState;
-    private CardState _currentState;
-
-    internal bool HasMatched {get;private set;} = false;
+    private CardStateMachine stateMachine;
 
     void Start()
     {
         checkDependencies();
         _image = GetComponent<Image>();
 
-        InitializeStates();
+        InitializeStateMachine();
     }
 
     private void checkDependencies()
@@ -51,25 +45,19 @@ public class Card : MonoBehaviour, ISelected
         }
     }
 
-    private void InitializeStates()
+    private void InitializeStateMachine()
     {
-        UnselectedState = new UnselectedState(this);
-        SelectedState = new SelectedState(this);
-        _pauseState = new PauseState(this, this);
-        _currentState = UnselectedState;
-        _currentState.OnEnterState();
+        stateMachine = new CardStateMachine(this, CardMatcher);
     }
 
     internal void Evaluation(bool result)
     {
-        HasMatched = result;
-        SetState(_pauseState);
+        stateMachine.Evaluation(result);
     }
 
     public void Selected()
     {
-        _currentState.Selected();
-        CardMatcher.CardSelected(this);
+        stateMachine.Selected();
     }
 
     internal  void FaceUpCard() 
@@ -80,12 +68,6 @@ public class Card : MonoBehaviour, ISelected
     internal void FaceDownCard()
     {
         _image.sprite = FaceDownSprite;
-    }
-
-    internal void SetState(CardState cardState)
-    {
-        _currentState = cardState;
-        _currentState.OnEnterState();
     }
 
     internal void Destroy()

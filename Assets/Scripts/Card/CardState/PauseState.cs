@@ -5,11 +5,14 @@ using UnityEngine;
 internal class PauseState : CardState
 {
     private Card _card;
-    MonoBehaviour _mono;
-    internal PauseState(Card card, MonoBehaviour mono)
+    private MonoBehaviour _mono;
+    private CardStateMachine _cardStateMachine;
+
+    internal PauseState(CardStateMachine cardStateMachine, Card card, MonoBehaviour mono)
     {
         _card = card;
         _mono = mono;
+        _cardStateMachine = cardStateMachine;
     }
 
     public override void Selected()
@@ -18,7 +21,7 @@ internal class PauseState : CardState
 
     internal override void OnEnterState()
     {
-        if (_card.HasMatched)
+        if (_cardStateMachine.HasMatched)
             _mono.StartCoroutine(PauseBeforeDestruction());
         else
             _mono.StartCoroutine(PauseBeforeReset());
@@ -33,6 +36,6 @@ internal class PauseState : CardState
     private IEnumerator PauseBeforeReset()
     {
         yield return new WaitForSeconds(Constants.ResetTime);
-        _card.SetState(_card.UnselectedState);
+        _cardStateMachine.SetState(_cardStateMachine.UnselectedState);
     }
 }
