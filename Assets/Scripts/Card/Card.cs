@@ -1,20 +1,27 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Card : MonoBehaviour
+public class Card : MonoBehaviour, ISelected
 {
     public Sprite FaceUpSprite;
     public Sprite FaceDownSprite;
     public CardMatcher CardMatcher;
-
     private Image _image;
+
+    internal CardState SelectedState;
+    internal CardState UnselectedState;
+    
+    private CardState _pauseState;
+    private CardState _currentState;
+
+    internal bool HasMatched {get;private set;} = false;
 
     void Start()
     {
         checkDependencies();
-
         _image = GetComponent<Image>();
-        _image.sprite = FaceDownSprite;
+
+        InitializeStates();
     }
 
     private void checkDependencies()
@@ -44,19 +51,45 @@ public class Card : MonoBehaviour
         }
     }
 
-    internal void CardMatched()
+    private void InitializeStates()
     {
-        Destroy(gameObject, Constants.TimeBeforeDestruction);
+        UnselectedState = new UnselectedState(this);
+        SelectedState = new SelectedState(this);
+        _pauseState = new PauseState(this, this);
+        _currentState = UnselectedState;
+        _currentState.OnEnterState();
     }
 
-    internal void CardNotmatching()
+    internal void Evaluation(bool result)
     {
-        _image.sprite = FaceDownSprite;
+        HasMatched = result;
+        SetState(_pauseState);
     }
 
     public void Selected()
     {
+        _currentState.Selected();
+        CardMatcher.CardSelected(this);
+    }
+
+    internal  void FaceUpCard() 
+    { 
         _image.sprite = FaceUpSprite;
-        CardMatcher.CardSelected(this); 
+    }
+
+    internal void FaceDownCard()
+    {
+        _image.sprite = FaceDownSprite;
+    }
+
+    internal void SetState(CardState cardState)
+    {
+        _currentState = cardState;
+        _currentState.OnEnterState();
+    }
+
+    internal void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

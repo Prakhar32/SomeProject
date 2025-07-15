@@ -1,9 +1,8 @@
 {
-    "name": "Helper",
+    "name": "Card",
     "rootNamespace": "",
     "references": [
-        "GUID:44e4656a1de6c07468e702443ff9d9e7",
-        "GUID:0c3e6ec5c59501d4ba78b48eae11e758"
+        "GUID:44e4656a1de6c07468e702443ff9d9e7"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

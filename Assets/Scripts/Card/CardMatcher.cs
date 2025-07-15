@@ -18,16 +18,9 @@ public class CardMatcher
         }
         else
         {
-            if (Evaluate(_previousCard.FaceUpSprite, card.FaceUpSprite))
-            {
-                _previousCard.CardMatched();
-                card.CardMatched();
-            }
-            else
-            {
-                _previousCard.CardNotmatching();
-                card.CardNotmatching();
-            }
+            bool result = Evaluate(_previousCard.FaceUpSprite, card.FaceUpSprite);
+            _previousCard.Evaluation(result);
+            card.Evaluation(result);
             _previousCard = null; 
         }
     }
