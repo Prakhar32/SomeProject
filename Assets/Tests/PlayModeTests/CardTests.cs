@@ -59,7 +59,22 @@ public class CardTests
     }
 
     [UnityTest]
-    public IEnumerator Card_Initially_FaceDown()
+    public IEnumerator ButtonNotSet()
+    {
+        LogAssert.ignoreFailingMessages = true;
+        GameObject g = new GameObject();
+        CardView card = g.AddComponent<CardView>();
+        card.FaceUpSprite = HelperMethods.createSpriteStub();
+        card.FaceDownSprite = HelperMethods.createSpriteStub();
+        g.AddComponent<Image>();
+        card.CardMatcher = new CardMatcher();
+
+        yield return null;
+        Assert.IsTrue(card == null);
+    }
+
+    [UnityTest]
+    public IEnumerator Card_Initially_FaceUp()
     {
         //Given
         GameObject g = new GameObject();
@@ -67,6 +82,22 @@ public class CardTests
         card.CardMatcher = new CardMatcher();
         yield return null;
 
+        //Then
+        Assert.IsTrue(g.GetComponent<Image>().sprite == card.FaceUpSprite);
+    }
+
+    [UnityTest]
+    public IEnumerator CardFacedown_AfterSomeTime()
+    {
+        //Given
+        GameObject g = new GameObject();
+        CardView card = HelperMethods.ConvertGameobjectIntoCard(g);
+        card.CardMatcher = new CardMatcher();
+        yield return null;
+
+        //When
+        yield return new WaitForSeconds(Constants.ViewTime);
+        
         //Then
         Assert.IsTrue(g.GetComponent<Image>().sprite == card.FaceDownSprite);
     }
@@ -79,7 +110,8 @@ public class CardTests
         CardView card = HelperMethods.ConvertGameobjectIntoCard(g);
         card.CardMatcher = new CardMatcher();
         yield return null;
-
+        yield return new WaitForSeconds(Constants.ViewTime);
+        
         //When
         card.Selected();
 
@@ -95,7 +127,8 @@ public class CardTests
         CardView card = HelperMethods.ConvertGameobjectIntoCard(g);
         card.CardMatcher = new CardMatcher();
         yield return null;
-
+        yield return new WaitForSeconds(Constants.ViewTime);
+        
         //When
         CardMemeto memento = card.SaveState();
         card.Selected();

@@ -20,5 +20,6 @@ internal class UnselectedState : CardState
     internal override void OnEnterState()
     {
         _card.FaceDownCard();
+        _card.EnableInteraction();
     }
 }

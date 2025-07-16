@@ -25,10 +25,11 @@ public class HelperMethods
     public static CardView ConvertGameobjectIntoCard(GameObject g)
     {
         CardView card = g.AddComponent<CardView>();
-        card.FaceUpSprite = HelperMethods.createSpriteStub();
-        card.FaceDownSprite = HelperMethods.createSpriteStub();
+        card.FaceUpSprite = createSpriteStub();
+        card.FaceDownSprite = createSpriteStub();
 
         g.AddComponent<Image>();
+        g.AddComponent<Button>();
         return card;
     }
 }

@@ -11,6 +11,7 @@ internal class CardStateMachine
     internal CardState UnselectedState { get; private set; }
     internal CardState DisabledState { get; private set; }
 
+    private CardState _hintState;
     private CardState _pauseBeforeDestructionState;
     private CardState _pauseBeforeResetState;
     private CardState _currentState;
@@ -28,10 +29,11 @@ internal class CardStateMachine
         UnselectedState = new UnselectedState(this, CardMatcher, _card);
         SelectedState = new SelectedState(_card);
         DisabledState = new DisabledState(_card);
+        _hintState = new HintState(_card, _card, this);
         _pauseBeforeDestructionState = new PauseBeforeDestructionState(this, _card);
         _pauseBeforeResetState = new PauseBeforeResetState(this, _card);
 
-        _currentState = UnselectedState;
+        _currentState = _hintState;
         _currentState.OnEnterState();
     }
 

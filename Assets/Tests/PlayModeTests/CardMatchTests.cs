@@ -23,6 +23,7 @@ public class CardMatchTests
 
         card2.FaceUpSprite = card1.FaceUpSprite;
         yield return null;
+        yield return new WaitForSeconds(Constants.ViewTime);
 
         //When
         card1.Selected();
@@ -51,6 +52,7 @@ public class CardMatchTests
 
         card2.FaceUpSprite = card1.FaceUpSprite;
         yield return null;
+        yield return new WaitForSeconds(Constants.ViewTime);
 
         //When
         card1.Selected();
@@ -81,6 +83,7 @@ public class CardMatchTests
         card2.CardMatcher = matcher;
 
         yield return null;
+        yield return new WaitForSeconds(Constants.ViewTime);
 
         //When
         card1.Selected();
@@ -106,6 +109,7 @@ public class CardMatchTests
         CardView card2 = HelperMethods.ConvertGameobjectIntoCard(g2);
         card2.CardMatcher = matcher;
         yield return null;
+        yield return new WaitForSeconds(Constants.ViewTime);
 
         //When
         card1.Selected();

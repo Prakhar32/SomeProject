@@ -6,7 +6,10 @@ public class CardView : MonoBehaviour, ISelected
     public Sprite FaceUpSprite;
     public Sprite FaceDownSprite;
     public CardMatcher CardMatcher;
+    public int ID;
+
     private Image _image;
+    private Button _button;
 
     private CardStateMachine stateMachine;
 
@@ -14,6 +17,7 @@ public class CardView : MonoBehaviour, ISelected
     {
         checkDependencies();
         _image = GetComponent<Image>();
+        _button = GetComponent<Button>();
 
         InitializeStateMachine();
     }
@@ -32,16 +36,22 @@ public class CardView : MonoBehaviour, ISelected
             throw new MissingReferenceException("FaceDownSprite is not assigned in the Card component.");
         }
 
+        if (CardMatcher == null)
+        {
+            Destroy(this);
+            throw new MissingReferenceException("CardMatcher is not assigned in the Card component.");
+        }
+
         if (GetComponent<Image>() == null)
         {
             Destroy(this);
             throw new MissingComponentException("Image component is missing on the GameObject.");
         }
 
-        if (CardMatcher == null)
+        if(GetComponent<Button>() == null)
         {
             Destroy(this);
-            throw new MissingReferenceException("CardMatcher is not assigned in the Card component.");
+            throw new MissingComponentException("Button component is missing on the GameObject.");
         }
     }
 
@@ -68,6 +78,15 @@ public class CardView : MonoBehaviour, ISelected
     internal void FaceDownCard()
     {
         _image.sprite = FaceDownSprite;
+    }
+    internal void EnableInteraction()
+    {
+        _button.interactable = true;
+    }
+
+    internal void DisableInteraction()
+    {
+        _button.interactable = false;
     }
 
     internal void DisableView()
