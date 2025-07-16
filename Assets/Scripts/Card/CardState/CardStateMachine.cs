@@ -59,7 +59,7 @@ internal class CardStateMachine
 
     internal CardMemeto SaveState()
     {
-        return new CardMemeto(_currentState);
+        return new CardMemeto(_currentState, FaceUpSprite);
     }
 
     internal void LoadState(CardMemeto memeto)

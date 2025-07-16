@@ -101,6 +101,7 @@ public class CardView : MonoBehaviour, ISelected
 
     public void LoadState(CardMemeto memeto)
     {
+        FaceUpSprite = memeto.GetCardSprite();
         stateMachine.LoadState(memeto);
     }
 }
