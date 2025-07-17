@@ -18,7 +18,7 @@ public class CardSetterTests
     public void Sprites_Empty()
     {
         LogAssert.ignoreFailingMessages = true;
-        Assert.Throws(typeof(MissingReferenceException), () => new CardSetter(new List<Sprite>(), null));
+        Assert.Throws(typeof(ArgumentException), () => new CardSetter(new List<Sprite>(), null));
     }
 
     [Test]
@@ -35,7 +35,7 @@ public class CardSetterTests
         Sprite sprite = HelperMethods.createSpriteStub();
         CardSetter cardSetter = new CardSetter(new List<Sprite>() { sprite }, new CardMatcher());
         CardView cardView = HelperMethods.ConvertGameobjectIntoCard(new GameObject());
-        cardSetter.SetFaceUpSprites(cardView);
+        cardSetter.SetupCards(new List<CardView>() { cardView, cardView});
         Assert.IsTrue(cardView.FaceUpSprite == sprite);
     }
 }

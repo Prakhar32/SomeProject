@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -58,21 +57,38 @@ public class ArrangementGenerator : MonoBehaviour
 
     public void GenerateArrangement(Difficulty difficulty)
     {
-        int cellSize = Constants.dataMapper[difficulty].CellSize;
-        LayoutGroup.cellSize = new Vector2(cellSize, cellSize);
-
-        int cellSpacing = Constants.dataMapper[difficulty].CellSpacing;
-        LayoutGroup.spacing = new Vector2(cellSpacing, cellSpacing);
+        setCellSize(difficulty);
+        setCellSpacing(difficulty);
 
         int rows = Constants.dataMapper[difficulty].Rows;
         LayoutGroup.constraintCount = rows;
-
         int numberofElements = rows * Constants.dataMapper[difficulty].Columns;
+        
+        initialiseElements(numberofElements);
+    }
+
+    private void setCellSize(Difficulty difficulty)
+    {
+        int cellSize = Constants.dataMapper[difficulty].CellSize;
+        LayoutGroup.cellSize = new Vector2(cellSize, cellSize);
+    }
+
+    private void setCellSpacing(Difficulty difficulty)
+    {
+        int cellSpacing = Constants.dataMapper[difficulty].CellSpacing;
+        LayoutGroup.spacing = new Vector2(cellSpacing, cellSpacing);
+    }
+
+    private void initialiseElements(int numberofElements)
+    {
+        List<CardView> cards = new List<CardView>();
         for (int i = 0; i < numberofElements; i++)
         {
             GameObject g = Instantiate(CardPrefab, ArrangementParent);
             CardView view = g.GetComponent<CardView>();
-            _cardSetter.SetFaceUpSprites(view);
+            cards.Add(view);
         }
+
+        _cardSetter.SetupCards(cards);
     }
 }

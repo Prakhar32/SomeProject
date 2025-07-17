@@ -17,7 +17,7 @@ public class CardSetter
 
         if(Sprites.Count == 0)
         {
-            throw new MissingReferenceException("Sprites cannot be Null or Empty");
+            throw new ArgumentException("Sprites cannot be empty");
         }
 
         if(Matcher == null)
@@ -29,9 +29,27 @@ public class CardSetter
         _matcher = Matcher;
     }
 
-    public void SetFaceUpSprites(CardView cardView)
+    private Sprite chooseingRandomSprite()
     {
+        return _sprites[UnityEngine.Random.Range(0, _sprites.Count)];
+    }
+
+    public void SetupCards(List<CardView> cardViews)
+    {
+        int cardCount = cardViews.Count;
+        for(int i = 0; i < cardCount; i++)
+        {
+            Sprite selectedSprite = chooseingRandomSprite();
+            setupCard(cardViews, selectedSprite, cardCount--);
+            setupCard(cardViews, selectedSprite, cardCount--);
+        }
+    }
+
+    private void setupCard(List<CardView> cardViews, Sprite sprite, int cardCount)
+    {
+        CardView cardView = cardViews[UnityEngine.Random.Range(0, cardCount)];
         cardView.CardMatcher = _matcher;
-        cardView.FaceUpSprite = _sprites[0];
+        cardView.FaceUpSprite = sprite;
+        cardViews.Remove(cardView);
     }
 }
