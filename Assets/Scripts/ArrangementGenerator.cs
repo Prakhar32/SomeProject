@@ -81,6 +81,7 @@ public class ArrangementGenerator : MonoBehaviour
 
     private void initialiseElements(int numberofElements)
     {
+        LayoutGroup.enabled = true;
         List<CardView> cards = new List<CardView>();
         for (int i = 0; i < numberofElements; i++)
         {
@@ -90,5 +91,6 @@ public class ArrangementGenerator : MonoBehaviour
         }
 
         _cardSetter.SetupCards(cards);
+        LayoutGroup.enabled = false;
     }
 }
