@@ -1,4 +1,3 @@
-
 public abstract class CardState : ISelected
 {
     public abstract void Selected();

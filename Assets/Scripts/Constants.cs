@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Constants 
 {
@@ -6,12 +7,14 @@ public class Constants
     public const float ResetTime = 1.0f;
     public const float ViewTime = 3.0f;
 
-    public static Dictionary<Difficulty, LevelData> dataMapper = new Dictionary<Difficulty, LevelData>()
+    public static Dictionary<Difficulty, LevelLayoutData> dataMapper = new Dictionary<Difficulty, LevelLayoutData>()
     {
-        { Difficulty.Easy, new LevelData(2, 3, 200, 50) },
-        { Difficulty.Medium, new LevelData(3, 4, 150, 25) },
-        { Difficulty.Hard, new LevelData(4, 5, 110, 15) }
+        { Difficulty.Easy, new LevelLayoutData(2, 3, 200, 50) },
+        { Difficulty.Medium, new LevelLayoutData(3, 4, 150, 25) },
+        { Difficulty.Hard, new LevelLayoutData(4, 5, 110, 15) }
     };
+
+    public static string FilePath = Application.persistentDataPath + "/level.fun";
 }
 
 public enum Difficulty
@@ -21,14 +24,14 @@ public enum Difficulty
     Hard = 2
 }
 
-public class LevelData
+public class LevelLayoutData
 {
     public int Rows;
     public int Columns;
     public int CellSize;
     public int CellSpacing;
 
-    public LevelData(int rows, int columns, int cellSize, int cellSpacing)
+    public LevelLayoutData(int rows, int columns, int cellSize, int cellSpacing)
     {
         Rows = rows;
         Columns = columns;

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class HelperMethods
@@ -31,5 +32,18 @@ public class HelperMethods
         g.AddComponent<Image>();
         g.AddComponent<Button>();
         return card;
+    }
+
+    public static SpriteAtlas GetSpriteAtlus()
+    {
+        return Resources.Load<SpriteAtlas>("Sprites/Atlas");
+    }
+
+    public static Sprite GetRandomSpriteFromAtlas()
+    {
+        SpriteAtlas atlas = Resources.Load<SpriteAtlas>("Sprites/Atlas");
+        Sprite[] sprites = new Sprite[atlas.spriteCount]; 
+        atlas.GetSprites(sprites);
+        return sprites[Random.Range(0, sprites.Length)];
     }
 }

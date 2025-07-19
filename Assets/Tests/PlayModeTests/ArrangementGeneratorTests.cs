@@ -72,7 +72,7 @@ public class ArrangementGeneratorTests
         arrangementGenerator.ArrangementParent = arrangementParent.transform;
         arrangementGenerator.CardMatcher = new CardMatcher();
         arrangementGenerator.CardPrefab = new GameObject();
-        arrangementGenerator.CardSprites = new List<Sprite>() { HelperMethods.createSpriteStub() };
+        arrangementGenerator.CardSpriteAtlas = HelperMethods.GetSpriteAtlus();
         yield return null;
 
         Assert.IsTrue(arrangementGenerator == null);
@@ -90,7 +90,7 @@ public class ArrangementGeneratorTests
         arrangementGenerator.ArrangementParent = arrangementParent.transform;
         arrangementGenerator.CardMatcher = new CardMatcher();
         arrangementGenerator.CardPrefab = new GameObject();
-        arrangementGenerator.CardSprites = new List<Sprite>() { HelperMethods.createSpriteStub() };
+        arrangementGenerator.CardSpriteAtlas = HelperMethods.GetSpriteAtlus();
         arrangementGenerator.FaceDownSprite = HelperMethods.createSpriteStub();
         yield return null;
 
@@ -111,7 +111,7 @@ public class ArrangementGeneratorTests
         HelperMethods.ConvertGameobjectIntoCard(arrangementGenerator.CardPrefab);
         arrangementGenerator.CardPrefab.SetActive(false);
         
-        arrangementGenerator.CardSprites = new List<Sprite>() { HelperMethods.createSpriteStub()};
+        arrangementGenerator.CardSpriteAtlas = HelperMethods.GetSpriteAtlus();
         arrangementGenerator.FaceDownSprite = HelperMethods.createSpriteStub();
         return arrangementGenerator;
     }

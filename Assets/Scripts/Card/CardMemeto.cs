@@ -1,22 +1,23 @@
 using UnityEngine;
 
+[System.Serializable]
 public class CardMemeto
 {
-    CardState cardState;
-    Sprite cardSprite;
-    public CardMemeto(CardState cardState, Sprite cardSprite)
+    string cardState;
+    string cardSpriteName;
+    public CardMemeto(string cardState, string cardSprite)
     {
         this.cardState = cardState;
-        this.cardSprite = cardSprite;
+        this.cardSpriteName = cardSprite;
     }
 
-    public CardState GetState()
+    public string GetState()
     {
         return cardState;
     }
 
-    public Sprite GetCardSprite() 
+    public string GetCardSpriteName() 
     {
-        return cardSprite; 
+        return cardSpriteName; 
     }
 }

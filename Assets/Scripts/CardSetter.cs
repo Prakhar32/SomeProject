@@ -2,22 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class CardSetter
 {
-    private List<Sprite> _sprites = new List<Sprite>();
+    private Sprite[] _sprites;
     private CardMatcher _matcher;
 
-    public CardSetter(List<Sprite> Sprites, CardMatcher Matcher)
+    public CardSetter(SpriteAtlas atlas, CardMatcher Matcher)
     {
-        if(Sprites == null)
+        if(atlas == null)
         {
-            throw new NullReferenceException("Sprites cannot be null");
+            throw new NullReferenceException("SpriteAtlus cannot be null");
         }
 
-        if(Sprites.Count == 0)
+        if(atlas.spriteCount == 0)
         {
-            throw new ArgumentException("Sprites cannot be empty");
+            throw new ArgumentException("SpriteAtlus cannot be empty");
         }
 
         if(Matcher == null)
@@ -25,13 +26,14 @@ public class CardSetter
             throw new NullReferenceException("Matcher cannot be null");
         }
 
-        _sprites = Sprites;
+        _sprites = new Sprite[atlas.spriteCount];
+        atlas.GetSprites(_sprites);
         _matcher = Matcher;
     }
 
     private Sprite chooseingRandomSprite()
     {
-        return _sprites[UnityEngine.Random.Range(0, _sprites.Count)];
+        return _sprites[UnityEngine.Random.Range(0, _sprites.Length)];
     }
 
     public void SetupCards(List<CardView> cardViews)

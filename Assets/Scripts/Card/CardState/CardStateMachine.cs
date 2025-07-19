@@ -1,10 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 internal class CardStateMachine
 {
-    public Sprite FaceUpSprite;
-    public Sprite FaceDownSprite;
     public CardMatcher CardMatcher;
 
     internal CardState SelectedState { get; private set; }
@@ -16,6 +15,8 @@ internal class CardStateMachine
     private CardState _pauseBeforeResetState;
     private CardState _currentState;
     private CardView _card;
+
+    Dictionary<string, CardState> _states = new Dictionary<string, CardState>();
 
     internal CardStateMachine(CardView card, CardMatcher cardMatcher)
     {
@@ -35,6 +36,13 @@ internal class CardStateMachine
 
         _currentState = _hintState;
         _currentState.OnEnterState();
+
+        _states.Add(UnselectedState.GetType().ToString(), UnselectedState);
+        _states.Add(SelectedState.GetType().ToString(), SelectedState);
+        _states.Add(DisabledState.GetType().ToString(), DisabledState);
+        _states.Add(_hintState.GetType().ToString(), _hintState);
+        _states.Add(_pauseBeforeDestructionState.GetType().ToString(), _pauseBeforeDestructionState);
+        _states.Add(_pauseBeforeResetState.GetType().ToString(), _pauseBeforeResetState);
     }
 
     public void Selected()
@@ -59,12 +67,12 @@ internal class CardStateMachine
 
     internal CardMemeto SaveState()
     {
-        return new CardMemeto(_currentState, FaceUpSprite);
+        return new CardMemeto(_currentState.GetType().ToString(), _card.FaceUpSprite.name);
     }
 
     internal void LoadState(CardMemeto memeto)
     {
-        _currentState = memeto.GetState();
+        _currentState = _states[memeto.GetState()];
         _currentState.OnEnterState();
     }
 }

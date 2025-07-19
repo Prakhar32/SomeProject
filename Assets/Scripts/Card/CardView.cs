@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class CardView : MonoBehaviour, ISelected
@@ -101,7 +102,7 @@ public class CardView : MonoBehaviour, ISelected
 
     public void LoadState(CardMemeto memeto)
     {
-        FaceUpSprite = memeto.GetCardSprite();
+        FaceUpSprite = Resources.Load<SpriteAtlas>("Sprites/Atlas").GetSprite(memeto.GetCardSpriteName());
         stateMachine.LoadState(memeto);
     }
 }

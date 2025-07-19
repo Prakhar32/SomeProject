@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class ArrangementGenerator : MonoBehaviour
@@ -9,7 +10,7 @@ public class ArrangementGenerator : MonoBehaviour
     public GameObject CardPrefab;
     public GridLayoutGroup LayoutGroup;
     public CardMatcher CardMatcher;
-    public List<Sprite> CardSprites;
+    public SpriteAtlas CardSpriteAtlas;
     public Sprite FaceDownSprite;
 
     private CardSetter _cardSetter;
@@ -52,7 +53,7 @@ public class ArrangementGenerator : MonoBehaviour
             throw new NullReferenceException("FaceDownSprite cannot be null");
         }
 
-        _cardSetter = new CardSetter(CardSprites, CardMatcher);
+        _cardSetter = new CardSetter(CardSpriteAtlas, CardMatcher);
     }
 
     public void GenerateArrangement(Difficulty difficulty)

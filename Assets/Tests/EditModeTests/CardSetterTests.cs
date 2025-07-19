@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEngine.U2D;
 
 public class CardSetterTests
 {
@@ -18,7 +19,7 @@ public class CardSetterTests
     public void Sprites_Empty()
     {
         LogAssert.ignoreFailingMessages = true;
-        Assert.Throws(typeof(ArgumentException), () => new CardSetter(new List<Sprite>(), null));
+        Assert.Throws(typeof(ArgumentException), () => new CardSetter(new SpriteAtlas(), null));
     }
 
     [Test]
@@ -26,16 +27,20 @@ public class CardSetterTests
     {
         LogAssert.ignoreFailingMessages = true;
         Assert.Throws(typeof(NullReferenceException), () => 
-            new CardSetter(new List<Sprite>() { HelperMethods.createSpriteStub()}, null));
+            new CardSetter(HelperMethods.GetSpriteAtlus(), null));
     }
 
     [Test]
     public void SpriteAssigned()
     {
-        Sprite sprite = HelperMethods.createSpriteStub();
-        CardSetter cardSetter = new CardSetter(new List<Sprite>() { sprite }, new CardMatcher());
+        //Given
+        CardSetter cardSetter = new CardSetter(HelperMethods.GetSpriteAtlus(), new CardMatcher());
+        
+        //When
         CardView cardView = HelperMethods.ConvertGameobjectIntoCard(new GameObject());
         cardSetter.SetupCards(new List<CardView>() { cardView, cardView});
-        Assert.IsTrue(cardView.FaceUpSprite == sprite);
+          
+        //Then
+        Assert.IsTrue(cardView.FaceUpSprite != null);
     }
 }
