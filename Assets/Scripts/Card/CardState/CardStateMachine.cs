@@ -9,10 +9,11 @@ internal class CardStateMachine
     internal CardState SelectedState { get; private set; }
     internal CardState UnselectedState { get; private set; }
     internal CardState DisabledState { get; private set; }
+    internal CardState PauseBeforeDestructionState { get; private set; }
+    internal CardState PauseBeforeResetState { get; private set; }
+
 
     private CardState _hintState;
-    private CardState _pauseBeforeDestructionState;
-    private CardState _pauseBeforeResetState;
     private CardState _currentState;
     private CardView _card;
 
@@ -27,12 +28,12 @@ internal class CardStateMachine
 
     private void InitializeStates()
     {
-        UnselectedState = new UnselectedState(this, CardMatcher, _card);
-        SelectedState = new SelectedState(_card);
+        UnselectedState = new UnselectedState(this, _card);
+        SelectedState = new SelectedState(_card, this, CardMatcher);
         DisabledState = new DisabledState(_card);
         _hintState = new HintState(_card, _card, this);
-        _pauseBeforeDestructionState = new PauseBeforeDestructionState(this, _card);
-        _pauseBeforeResetState = new PauseBeforeResetState(this, _card);
+        PauseBeforeDestructionState = new PauseBeforeDestructionState(this, _card);
+        PauseBeforeResetState = new PauseBeforeResetState(this, _card);
 
         _currentState = _hintState;
         _currentState.OnEnterState();
@@ -41,8 +42,8 @@ internal class CardStateMachine
         _states.Add(SelectedState.GetType().ToString(), SelectedState);
         _states.Add(DisabledState.GetType().ToString(), DisabledState);
         _states.Add(_hintState.GetType().ToString(), _hintState);
-        _states.Add(_pauseBeforeDestructionState.GetType().ToString(), _pauseBeforeDestructionState);
-        _states.Add(_pauseBeforeResetState.GetType().ToString(), _pauseBeforeResetState);
+        _states.Add(PauseBeforeDestructionState.GetType().ToString(), PauseBeforeDestructionState);
+        _states.Add(PauseBeforeResetState.GetType().ToString(), PauseBeforeResetState);
     }
 
     public void Selected()
@@ -53,15 +54,6 @@ internal class CardStateMachine
     internal void SetState(CardState cardState)
     {
         _currentState = cardState;
-        _currentState.OnEnterState();
-    }
-
-    internal void Evaluation(bool result)
-    {
-        if(result)
-            _currentState = _pauseBeforeDestructionState;
-        else
-            _currentState = _pauseBeforeResetState;
         _currentState.OnEnterState();
     }
 

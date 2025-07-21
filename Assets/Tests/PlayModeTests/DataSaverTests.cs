@@ -12,8 +12,7 @@ public class DataSaverTests
     {
         //Given
         GameObject g = new GameObject();
-        CardView cardView = HelperMethods.ConvertGameobjectIntoCard(g);
-        cardView.CardMatcher = new CardMatcher();
+        CardView cardView = HelperMethods.ConvertGameobjectIntoCard(g, new CardMatcher());
         cardView.FaceUpSprite = HelperMethods.GetRandomSpriteFromAtlas();
         yield return null;
 

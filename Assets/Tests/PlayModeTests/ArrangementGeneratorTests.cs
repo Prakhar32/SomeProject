@@ -108,7 +108,7 @@ public class ArrangementGeneratorTests
         arrangementGenerator.CardMatcher = new CardMatcher();
         
         arrangementGenerator.CardPrefab = new GameObject();
-        HelperMethods.ConvertGameobjectIntoCard(arrangementGenerator.CardPrefab);
+        HelperMethods.ConvertGameobjectIntoCard(arrangementGenerator.CardPrefab, arrangementGenerator.CardMatcher);
         arrangementGenerator.CardPrefab.SetActive(false);
         
         arrangementGenerator.CardSpriteAtlas = HelperMethods.GetSpriteAtlus();

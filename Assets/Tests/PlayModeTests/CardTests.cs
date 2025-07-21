@@ -78,8 +78,7 @@ public class CardTests
     {
         //Given
         GameObject g = new GameObject();
-        CardView card = HelperMethods.ConvertGameobjectIntoCard(g);
-        card.CardMatcher = new CardMatcher();
+        CardView card = HelperMethods.ConvertGameobjectIntoCard(g, new CardMatcher());
         yield return null;
 
         //Then
@@ -91,8 +90,7 @@ public class CardTests
     {
         //Given
         GameObject g = new GameObject();
-        CardView card = HelperMethods.ConvertGameobjectIntoCard(g);
-        card.CardMatcher = new CardMatcher();
+        CardView card = HelperMethods.ConvertGameobjectIntoCard(g, new CardMatcher());
         yield return null;
 
         //When
@@ -107,8 +105,7 @@ public class CardTests
     {
         //Given
         GameObject g = new GameObject();
-        CardView card = HelperMethods.ConvertGameobjectIntoCard(g);
-        card.CardMatcher = new CardMatcher();
+        CardView card = HelperMethods.ConvertGameobjectIntoCard(g, new CardMatcher());
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
         
@@ -124,8 +121,7 @@ public class CardTests
     {
         //Given
         GameObject g = new GameObject();
-        CardView card = HelperMethods.ConvertGameobjectIntoCard(g);
-        card.CardMatcher = new CardMatcher();
+        CardView card = HelperMethods.ConvertGameobjectIntoCard(g, new CardMatcher());
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
         

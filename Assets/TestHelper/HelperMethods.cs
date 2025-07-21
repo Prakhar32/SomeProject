@@ -23,11 +23,12 @@ public class HelperMethods
         return sprite;
     }
 
-    public static CardView ConvertGameobjectIntoCard(GameObject g)
+    public static CardView ConvertGameobjectIntoCard(GameObject g, CardMatcher cardMatcher)
     {
         CardView card = g.AddComponent<CardView>();
         card.FaceUpSprite = createSpriteStub();
         card.FaceDownSprite = createSpriteStub();
+        card.CardMatcher = cardMatcher;
 
         g.AddComponent<Image>();
         g.AddComponent<Button>();

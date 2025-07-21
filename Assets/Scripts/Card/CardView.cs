@@ -61,11 +61,6 @@ public class CardView : MonoBehaviour, ISelected
         stateMachine = new CardStateMachine(this, CardMatcher);
     }
 
-    internal void Evaluation(bool result)
-    {
-        stateMachine.Evaluation(result);
-    }
-
     public void Selected()
     {
         stateMachine.Selected();

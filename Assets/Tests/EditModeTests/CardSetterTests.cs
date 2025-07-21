@@ -34,10 +34,11 @@ public class CardSetterTests
     public void SpriteAssigned()
     {
         //Given
-        CardSetter cardSetter = new CardSetter(HelperMethods.GetSpriteAtlus(), new CardMatcher());
-        
+        CardMatcher matcher = new CardMatcher();
+        CardSetter cardSetter = new CardSetter(HelperMethods.GetSpriteAtlus(), matcher);
+        CardView cardView = HelperMethods.ConvertGameobjectIntoCard(new GameObject(), matcher);
+
         //When
-        CardView cardView = HelperMethods.ConvertGameobjectIntoCard(new GameObject());
         cardSetter.SetupCards(new List<CardView>() { cardView, cardView});
           
         //Then

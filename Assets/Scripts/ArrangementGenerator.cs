@@ -88,6 +88,7 @@ public class ArrangementGenerator : MonoBehaviour
         {
             GameObject g = Instantiate(CardPrefab, ArrangementParent);
             CardView view = g.GetComponent<CardView>();
+            view.ID = i;
             cards.Add(view);
         }
 
