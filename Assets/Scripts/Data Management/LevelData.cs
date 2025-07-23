@@ -4,9 +4,9 @@ using System.Collections.Generic;
 public class LevelData
 {
     public Difficulty Difficulty;
-    public List<CardMemeto> CardData;
+    public Dictionary<int, CardMemeto> CardData;
 
-    public LevelData(Difficulty difficulty, List<CardMemeto> cardData)
+    public LevelData(Difficulty difficulty, Dictionary<int, CardMemeto> cardData)
     {
         Difficulty = difficulty;
         CardData = cardData;

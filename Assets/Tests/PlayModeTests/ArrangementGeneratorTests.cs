@@ -72,7 +72,7 @@ public class ArrangementGeneratorTests
         arrangementGenerator.ArrangementParent = arrangementParent.transform;
         arrangementGenerator.CardMatcher = new CardMatcher();
         arrangementGenerator.CardPrefab = new GameObject();
-        arrangementGenerator.CardSpriteAtlas = HelperMethods.GetSpriteAtlus();
+        arrangementGenerator.CardSprites = HelperMethods.GetSprites();
         yield return null;
 
         Assert.IsTrue(arrangementGenerator == null);
@@ -90,36 +90,17 @@ public class ArrangementGeneratorTests
         arrangementGenerator.ArrangementParent = arrangementParent.transform;
         arrangementGenerator.CardMatcher = new CardMatcher();
         arrangementGenerator.CardPrefab = new GameObject();
-        arrangementGenerator.CardSpriteAtlas = HelperMethods.GetSpriteAtlus();
+        arrangementGenerator.CardSprites = HelperMethods.GetSprites();
         arrangementGenerator.FaceDownSprite = HelperMethods.createSpriteStub();
         yield return null;
 
         Assert.IsTrue(arrangementGenerator == null);
     }
 
-    private ArrangementGenerator GetArrangementGenerator()
-    {
-        GameObject g = new GameObject();
-        GameObject arrangementParent = new GameObject();
-
-        ArrangementGenerator arrangementGenerator = g.AddComponent<ArrangementGenerator>();
-        arrangementGenerator.LayoutGroup = arrangementParent.AddComponent<GridLayoutGroup>();
-        arrangementGenerator.ArrangementParent = arrangementParent.transform;
-        arrangementGenerator.CardMatcher = new CardMatcher();
-        
-        arrangementGenerator.CardPrefab = new GameObject();
-        HelperMethods.ConvertGameobjectIntoCard(arrangementGenerator.CardPrefab, arrangementGenerator.CardMatcher);
-        arrangementGenerator.CardPrefab.SetActive(false);
-        
-        arrangementGenerator.CardSpriteAtlas = HelperMethods.GetSpriteAtlus();
-        arrangementGenerator.FaceDownSprite = HelperMethods.createSpriteStub();
-        return arrangementGenerator;
-    }
-
     [UnityTest]
     public IEnumerator EasyDifficulty_6Elements()
     {
-        ArrangementGenerator arrangementGenerator = GetArrangementGenerator();
+        ArrangementGenerator arrangementGenerator = HelperMethods.GetArrangementGenerator();
         yield return null;
 
         arrangementGenerator.GenerateArrangement(Difficulty.Easy);
@@ -131,7 +112,7 @@ public class ArrangementGeneratorTests
     [UnityTest]
     public IEnumerator MediumDifficulty_12Elements()
     {
-        ArrangementGenerator arrangementGenerator = GetArrangementGenerator();
+        ArrangementGenerator arrangementGenerator = HelperMethods.GetArrangementGenerator();
         yield return null;
 
         arrangementGenerator.GenerateArrangement(Difficulty.Medium);
@@ -143,7 +124,7 @@ public class ArrangementGeneratorTests
     [UnityTest]
     public IEnumerator HardDifficulty_20Elements()
     {
-        ArrangementGenerator arrangementGenerator = GetArrangementGenerator();
+        ArrangementGenerator arrangementGenerator = HelperMethods.GetArrangementGenerator();
         yield return null;
 
         arrangementGenerator.GenerateArrangement(Difficulty.Hard);
@@ -155,7 +136,7 @@ public class ArrangementGeneratorTests
     [UnityTest]
     public IEnumerator LevelGeneratedisSolvable()
     {
-        ArrangementGenerator arrangementGenerator = GetArrangementGenerator();
+        ArrangementGenerator arrangementGenerator = HelperMethods.GetArrangementGenerator();
         yield return null;
 
         arrangementGenerator.GenerateArrangement(Difficulty.Hard);
@@ -176,5 +157,22 @@ public class ArrangementGeneratorTests
             if(value % 2 != 0)
                 Assert.Fail();
         }
+    }
+
+    [UnityTest]
+    public IEnumerator ResetEmptiesCards()
+    {
+        //Given
+        ArrangementGenerator arrangementGenerator = HelperMethods.GetArrangementGenerator();
+        yield return null;
+        arrangementGenerator.GenerateArrangement(Difficulty.Easy);
+        yield return null;
+        
+        //When
+        arrangementGenerator.ResetArrangement();
+        yield return null;
+        
+        //Then
+        Assert.IsTrue(arrangementGenerator.ArrangementParent.childCount == 0);
     }
 }

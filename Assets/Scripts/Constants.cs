@@ -15,6 +15,7 @@ public class Constants
     };
 
     public static string FilePath = Application.persistentDataPath + "/level.fun";
+    public const string PathToSprites = "Sprites/";
 }
 
 public enum Difficulty

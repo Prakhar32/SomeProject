@@ -10,7 +10,7 @@ public class ArrangementGenerator : MonoBehaviour
     public GameObject CardPrefab;
     public GridLayoutGroup LayoutGroup;
     public CardMatcher CardMatcher;
-    public SpriteAtlas CardSpriteAtlas;
+    public List<Sprite> CardSprites;
     public Sprite FaceDownSprite;
 
     private CardSetter _cardSetter;
@@ -53,11 +53,12 @@ public class ArrangementGenerator : MonoBehaviour
             throw new NullReferenceException("FaceDownSprite cannot be null");
         }
 
-        _cardSetter = new CardSetter(CardSpriteAtlas, CardMatcher);
+        _cardSetter = new CardSetter(CardSprites);
     }
 
     public void GenerateArrangement(Difficulty difficulty)
     {
+        ResetArrangement();
         setCellSize(difficulty);
         setCellSpacing(difficulty);
 
@@ -88,11 +89,21 @@ public class ArrangementGenerator : MonoBehaviour
         {
             GameObject g = Instantiate(CardPrefab, ArrangementParent);
             CardView view = g.GetComponent<CardView>();
+            view.CardMatcher = CardMatcher;
             view.ID = i;
+            view.FaceUpSprite = null;
             cards.Add(view);
         }
 
         _cardSetter.SetupCards(cards);
         LayoutGroup.enabled = false;
+    }
+
+    public void ResetArrangement()
+    {
+        for(int i = 0; i < ArrangementParent.childCount; i++)
+        {
+            Destroy(ArrangementParent.GetChild(i).gameObject);
+        }
     }
 }

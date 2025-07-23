@@ -12,22 +12,14 @@ public class CardSetterTests
     public void Sprites_Null()
     {
         LogAssert.ignoreFailingMessages = true;
-        Assert.Throws(typeof(NullReferenceException), () => new CardSetter(null, null));
+        Assert.Throws(typeof(NullReferenceException), () => new CardSetter(null));
     }
 
     [Test]
     public void Sprites_Empty()
     {
         LogAssert.ignoreFailingMessages = true;
-        Assert.Throws(typeof(ArgumentException), () => new CardSetter(new SpriteAtlas(), null));
-    }
-
-    [Test]
-    public void CardMatcherCannotBeNull()
-    {
-        LogAssert.ignoreFailingMessages = true;
-        Assert.Throws(typeof(NullReferenceException), () => 
-            new CardSetter(HelperMethods.GetSpriteAtlus(), null));
+        Assert.Throws(typeof(ArgumentException), () => new CardSetter(new List<Sprite>()));
     }
 
     [Test]
@@ -35,7 +27,7 @@ public class CardSetterTests
     {
         //Given
         CardMatcher matcher = new CardMatcher();
-        CardSetter cardSetter = new CardSetter(HelperMethods.GetSpriteAtlus(), matcher);
+        CardSetter cardSetter = new CardSetter(HelperMethods.GetSprites());
         CardView cardView = HelperMethods.ConvertGameobjectIntoCard(new GameObject(), matcher);
 
         //When

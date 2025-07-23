@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class DataSaver
 {
-    public static void SaveData(Difficulty difficulty, List<CardMemeto> cardData)
+    public static void SaveData(Difficulty difficulty, Dictionary<int, CardMemeto> cardData)
     {
         LevelData levelData = new LevelData(difficulty, cardData);
         BinaryFormatter formatter = new BinaryFormatter();

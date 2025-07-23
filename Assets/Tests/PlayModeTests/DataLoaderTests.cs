@@ -21,11 +21,11 @@ public class DataLoaderTests
         //Given
         GameObject g = new GameObject();
         CardView cardView = HelperMethods.ConvertGameobjectIntoCard(g, new CardMatcher());
-        cardView.FaceUpSprite = HelperMethods.GetRandomSpriteFromAtlas();
+        cardView.FaceUpSprite = HelperMethods.GetRandomSprite();
         yield return null;
 
         //When
-        DataSaver.SaveData(Difficulty.Easy, new List<CardMemeto> { cardView.SaveState() });
+        DataSaver.SaveData(Difficulty.Easy, new Dictionary<int, CardMemeto>{ { 0, cardView.SaveState() } });
         cardView.Selected();
         LevelData data = DataLoader.LoadData();
         cardView.LoadState(data.CardData[0]);

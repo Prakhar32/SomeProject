@@ -7,31 +7,23 @@ using UnityEngine.U2D;
 public class CardSetter
 {
     private Sprite[] _sprites;
-    private CardMatcher _matcher;
 
-    public CardSetter(SpriteAtlas atlas, CardMatcher Matcher)
+    public CardSetter(List<Sprite> sprites)
     {
-        if(atlas == null)
+        if(sprites == null)
         {
             throw new NullReferenceException("SpriteAtlus cannot be null");
         }
 
-        if(atlas.spriteCount == 0)
+        if(sprites.Count == 0)
         {
             throw new ArgumentException("SpriteAtlus cannot be empty");
         }
 
-        if(Matcher == null)
-        {
-            throw new NullReferenceException("Matcher cannot be null");
-        }
-
-        _sprites = new Sprite[atlas.spriteCount];
-        atlas.GetSprites(_sprites);
-        _matcher = Matcher;
+        _sprites = sprites.ToArray();
     }
 
-    private Sprite chooseingRandomSprite()
+    private Sprite choosingRandomSprite()
     {
         return _sprites[UnityEngine.Random.Range(0, _sprites.Length)];
     }
@@ -39,9 +31,9 @@ public class CardSetter
     public void SetupCards(List<CardView> cardViews)
     {
         int cardCount = cardViews.Count;
-        for(int i = 0; i < cardCount; i++)
+        while(cardCount > 0)
         {
-            Sprite selectedSprite = chooseingRandomSprite();
+            Sprite selectedSprite = choosingRandomSprite();
             setupCard(cardViews, selectedSprite, cardCount--);
             setupCard(cardViews, selectedSprite, cardCount--);
         }
@@ -50,8 +42,8 @@ public class CardSetter
     private void setupCard(List<CardView> cardViews, Sprite sprite, int cardCount)
     {
         CardView cardView = cardViews[UnityEngine.Random.Range(0, cardCount)];
-        cardView.CardMatcher = _matcher;
         cardView.FaceUpSprite = sprite;
+
         cardViews.Remove(cardView);
     }
 }

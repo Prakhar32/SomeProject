@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
@@ -35,16 +37,35 @@ public class HelperMethods
         return card;
     }
 
-    public static SpriteAtlas GetSpriteAtlus()
+    public static List<Sprite> GetSprites()
     {
-        return Resources.Load<SpriteAtlas>("Sprites/Atlas");
+        List<Sprite> sprites = new List<Sprite>();
+        Sprite[] sp = Resources.LoadAll<Sprite>("Sprites");
+        sprites.AddRange(sp);
+        return sprites;
     }
 
-    public static Sprite GetRandomSpriteFromAtlas()
+    public static Sprite GetRandomSprite()
     {
-        SpriteAtlas atlas = Resources.Load<SpriteAtlas>("Sprites/Atlas");
-        Sprite[] sprites = new Sprite[atlas.spriteCount]; 
-        atlas.GetSprites(sprites);
+        Sprite[] sprites = Resources.LoadAll<Sprite>("Sprites");
         return sprites[Random.Range(0, sprites.Length)];
+    }
+
+    public static ArrangementGenerator GetArrangementGenerator()
+    {
+        GameObject g = new GameObject();
+        GameObject arrangementParent = new GameObject();
+
+        ArrangementGenerator arrangementGenerator = g.AddComponent<ArrangementGenerator>();
+        arrangementGenerator.LayoutGroup = arrangementParent.AddComponent<GridLayoutGroup>();
+        arrangementGenerator.ArrangementParent = arrangementParent.transform;
+        arrangementGenerator.CardMatcher = new CardMatcher();
+
+        arrangementGenerator.CardPrefab = new GameObject();
+        ConvertGameobjectIntoCard(arrangementGenerator.CardPrefab, arrangementGenerator.CardMatcher);
+
+        arrangementGenerator.CardSprites = GetSprites();
+        arrangementGenerator.FaceDownSprite = createSpriteStub();
+        return arrangementGenerator;
     }
 }

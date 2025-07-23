@@ -97,7 +97,7 @@ public class CardView : MonoBehaviour, ISelected
 
     public void LoadState(CardMemeto memeto)
     {
-        FaceUpSprite = Resources.Load<SpriteAtlas>("Sprites/Atlas").GetSprite(memeto.GetCardSpriteName());
+        FaceUpSprite = Resources.Load<Sprite>("Sprites/" + memeto.GetCardSpriteName());
         stateMachine.LoadState(memeto);
     }
 }

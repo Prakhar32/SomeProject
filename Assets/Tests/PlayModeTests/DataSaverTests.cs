@@ -13,13 +13,13 @@ public class DataSaverTests
         //Given
         GameObject g = new GameObject();
         CardView cardView = HelperMethods.ConvertGameobjectIntoCard(g, new CardMatcher());
-        cardView.FaceUpSprite = HelperMethods.GetRandomSpriteFromAtlas();
+        cardView.FaceUpSprite = HelperMethods.GetRandomSprite();
         yield return null;
 
-        List<CardMemeto> mementos = new List<CardMemeto>();
+        Dictionary<int, CardMemeto> mementos = new Dictionary<int, CardMemeto>();
         int rows = Constants.dataMapper[Difficulty.Easy].Rows;
         for (int i = 0; i < rows * Constants.dataMapper[Difficulty.Easy].Columns; i++)
-            mementos.Add(cardView.SaveState());
+            mementos.Add(i, cardView.SaveState());
 
         //When
         DataSaver.SaveData(Difficulty.Easy, mementos);
