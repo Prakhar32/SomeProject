@@ -5,7 +5,8 @@ using UnityEngine;
 public class LevelSaver : MonoBehaviour
 {
     public Transform ArrangementParent;
-    
+    public Score Score;
+
     private Difficulty _difficulty;
     
     public void SetDifficulty(Difficulty difficulty)
@@ -19,6 +20,12 @@ public class LevelSaver : MonoBehaviour
         {
             Destroy(this);
             throw new MissingReferenceException("ArrangementParent cannot be null");
+        }
+
+        if(Score == null)
+        {
+            Destroy(this);
+            throw new MissingReferenceException("Score cannot be null");
         }
     }
 

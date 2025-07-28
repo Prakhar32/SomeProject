@@ -25,6 +25,7 @@ public class LevelLoaderTests
         ArrangementGenerator arrangementGenerator = HelperMethods.GetArrangementGenerator();
 
         LevelSaver levelSaver = new GameObject().AddComponent<LevelSaver>();
+        levelSaver.Score = new Score(arrangementGenerator.CardMatcher);
         levelSaver.ArrangementParent = arrangementGenerator.ArrangementParent;
         levelSaver.SetDifficulty(Difficulty.Easy);
 

@@ -19,6 +19,18 @@ public class LevelSaverTests
     }
 
     [UnityTest]
+    public IEnumerator ScoreNotNull()
+    {
+        LogAssert.ignoreFailingMessages = true;
+        GameObject g = new GameObject();
+        LevelSaver levelSaver = g.AddComponent<LevelSaver>();
+        levelSaver.ArrangementParent = new GameObject().transform;
+        yield return null;
+
+        Assert.IsTrue(levelSaver == null);
+    }
+
+    [UnityTest]
     public IEnumerator SaveSuccessful()
     {
         //Given
@@ -26,6 +38,7 @@ public class LevelSaverTests
         
         GameObject g = new GameObject();
         LevelSaver levelSaver = g.AddComponent<LevelSaver>();
+        levelSaver.Score = new Score(new CardMatcher());
         levelSaver.SetDifficulty(Difficulty.Easy);
 
         ArrangementGenerator arrangementGenerator = HelperMethods.GetArrangementGenerator();
