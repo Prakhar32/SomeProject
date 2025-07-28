@@ -1,18 +1,32 @@
 using NUnit.Framework;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class ScoreTests
+public class ScoreDisplayTests
 {
     [UnityTest]
-    public IEnumerator CardMatcherMissing()
+    public IEnumerator ScoreCannotBeNull()
     {
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
-        Score score = g.AddComponent<Score>();
+        ScoreDisplay scoreDisplay = g.AddComponent<ScoreDisplay>();
         yield return null;
-        Assert.IsTrue(score == null);
+        
+        Assert.IsTrue(scoreDisplay == null);
+    }
+
+    [UnityTest]
+    public IEnumerator TextFieldCannotBeNull()
+    {
+        LogAssert.ignoreFailingMessages = true;
+        GameObject g = new GameObject();
+        ScoreDisplay scoreDisplay = g.AddComponent<ScoreDisplay>();
+        scoreDisplay.score = new Score(new CardMatcher());
+        yield return null;
+
+        Assert.IsTrue(scoreDisplay == null);
     }
 
     [UnityTest]
@@ -29,18 +43,19 @@ public class ScoreTests
 
 
         GameObject g3 = new GameObject();
-        Score score = g3.AddComponent<Score>();
-        score.CardMatcher = cardMatcher;
+        ScoreDisplay score = g3.AddComponent<ScoreDisplay>();
+        score.score = new Score(cardMatcher);
+        score.Text = g3.AddComponent<TextMeshProUGUI>();
+
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
 
         //When
-        int initialScore = score.getScore();
         cardView1.Selected();
         cardView2.Selected();
         yield return null;
 
         //Then
-        Assert.IsTrue(initialScore + 1 == score.getScore());
+        Assert.IsTrue(g3.GetComponent<TextMeshProUGUI>().text.Equals("Score : 1"));
     }
 }
