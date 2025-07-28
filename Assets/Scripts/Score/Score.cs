@@ -14,7 +14,7 @@ public class Score
         if (cardMatcher == null)
             throw new NullReferenceException("CardMatcher cannot be null");
 
-        cardMatcher.SubscribeToSuccessfulMatch(IncreaseScore);
+        cardMatcher.SubscribeToSuccessfulMatch(increaseScore);
     }
 
     public int getScore()
@@ -22,7 +22,7 @@ public class Score
         return _score;
     }
 
-    public void IncreaseScore()
+    private void increaseScore()
     {
         _score++;
         _scoreChangeEvent.Invoke();
