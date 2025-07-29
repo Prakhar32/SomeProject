@@ -1,19 +1,17 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Events;
 
 public class Score
 {
     private int _score;
-    private UnityEvent _scoreChangeEvent = new UnityEvent();
+    private UnityEvent _scoreChangeEvent;
 
     public Score(CardMatcher cardMatcher)
     {
         if (cardMatcher == null)
             throw new NullReferenceException("CardMatcher cannot be null");
 
+        _scoreChangeEvent = new UnityEvent();
         cardMatcher.SubscribeToSuccessfulMatch(increaseScore);
     }
 

@@ -1,18 +1,31 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class TurnTests
+public class TurnDisplayTests
 {
     [UnityTest]
-    public IEnumerator CardMatcherMissing()
+    public IEnumerator TurnCounterMissing()
     {
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
-        TurnCounter turn = g.AddComponent<TurnCounter>();
+        TurnCounterDisplay turn = g.AddComponent<TurnCounterDisplay>();
         yield return null;
+        Assert.IsTrue(turn == null);
+    }
+
+    [UnityTest]
+    public IEnumerator TextFieldMissing()
+    {
+        LogAssert.ignoreFailingMessages = true;
+        GameObject g = new GameObject();
+        TurnCounterDisplay turn = g.AddComponent<TurnCounterDisplay>();
+        turn.TurnCounter = new TurnCounter(new CardMatcher());
+        yield return null;
+        
         Assert.IsTrue(turn == null);
     }
 
@@ -29,19 +42,19 @@ public class TurnTests
         
 
         GameObject g3 = new GameObject();
-        TurnCounter turn = g3.AddComponent<TurnCounter>();
-        turn.Matcher = cardMatcher;
+        TurnCounterDisplay turn = g3.AddComponent<TurnCounterDisplay>();
+        turn.TurnCounter = new TurnCounter(cardMatcher);
+        turn.Text = g3.AddComponent<TextMeshProUGUI>();
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
 
-        //When
-        int initialScore = turn.getTurnCount();
+        //When;
         cardView1.Selected();
         cardView2.Selected();
         yield return null;
 
         //Then
-        Assert.IsTrue(initialScore + 1 == turn.getTurnCount());
+        Assert.AreEqual(g3.GetComponent<TextMeshProUGUI>().text, "Turn : 2");
     }
 
     [UnityTest]
@@ -54,22 +67,22 @@ public class TurnTests
 
         GameObject g2 = new GameObject();
         CardView cardView2 = HelperMethods.ConvertGameobjectIntoCard(g2, cardMatcher);
+        
         cardView1.FaceUpSprite = cardView2.FaceUpSprite;
 
-
         GameObject g3 = new GameObject();
-        TurnCounter turn = g3.AddComponent<TurnCounter>();
-        turn.Matcher = cardMatcher;
+        TurnCounterDisplay turn = g3.AddComponent<TurnCounterDisplay>();
+        turn.TurnCounter = new TurnCounter(cardMatcher);
+        turn.Text = g3.AddComponent<TextMeshProUGUI>();
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
 
-        //When
-        int initialScore = turn.getTurnCount();
+        //When;
         cardView1.Selected();
         cardView2.Selected();
         yield return null;
 
         //Then
-        Assert.IsTrue(initialScore + 1 == turn.getTurnCount());
+        Assert.AreEqual(g3.GetComponent<TextMeshProUGUI>().text, "Turn : 2");
     }
 }
