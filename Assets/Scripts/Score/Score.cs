@@ -34,6 +34,9 @@ public class Score
 
     public void SubscribeToScoreChange(UnityAction action)
     {
+        if(action == null)
+            throw new NullReferenceException("Action cannot be null");
+
         _scoreChangeEvent.AddListener(action);
     }
 

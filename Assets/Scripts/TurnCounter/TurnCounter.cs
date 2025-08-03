@@ -28,6 +28,9 @@ public class TurnCounter
 
     public void SubscribeToTurnChange(UnityAction action)
     {
+        if(action == null)
+            throw new NullReferenceException("Action cannot be null");
+
         _turnChangeEvent.AddListener(action);
     }
 
