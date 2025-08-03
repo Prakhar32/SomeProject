@@ -18,6 +18,7 @@ public class TimerTests
         timerDisplay.timerText = gameObject.AddComponent<TextMeshProUGUI>();
 
         Timer timer = new Timer(timerDisplay);
+        timerDisplay.Timer = timer;
 
         //When
         timer.SetTimer(2f);
@@ -34,9 +35,11 @@ public class TimerTests
         GameObject gameObject = new GameObject();
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
         timerDisplay.timerText = gameObject.AddComponent<TextMeshProUGUI>();
+        
+        Timer timer = new Timer(timerDisplay);
+        timerDisplay.Timer = timer; 
         yield return null;
 
-        Timer timer = new Timer(timerDisplay);
         Assert.Throws<NullReferenceException>(() => timer.SubscibeToTimeChange(null));
     }
 
@@ -47,8 +50,10 @@ public class TimerTests
         GameObject gameObject = new GameObject();
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
         timerDisplay.timerText = gameObject.AddComponent<TextMeshProUGUI>();
-        Timer timer = new Timer(timerDisplay);
-        
+        Timer timer = new Timer(timerDisplay); 
+        timerDisplay.Timer = timer;
+        yield return null;
+
         bool timeChanged = false;
         UnityAction action = () => timeChanged = true;
         timer.SubscibeToTimeChange(action);
@@ -70,7 +75,9 @@ public class TimerTests
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
         timerDisplay.timerText = gameObject.AddComponent<TextMeshProUGUI>();
         Timer timer = new Timer(timerDisplay);
-        
+        timerDisplay.Timer = timer;
+        yield return null;
+
         bool timeChanged = false;
         UnityAction action = () => timeChanged = true;
         timer.SubscibeToTimeChange(action);

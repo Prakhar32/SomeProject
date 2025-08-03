@@ -20,9 +20,7 @@ public class Timer
 
     public void SetTimer(float time)
     {
-        //Done to handle a race condition when event is invoked but invokation does not happen on the same frame.
-        //resulting in the value being Time.delta time lesser than expected.
-        _currentTime = time + Time.deltaTime;
+        _currentTime = time;
         _mono.StopCoroutine(reduceTime());
     }
 
@@ -33,10 +31,12 @@ public class Timer
 
     private IEnumerator reduceTime()
     {
-        while(_currentTime > 0)
+        _timeChangeEvent.Invoke();
+        
+        while (_currentTime > 0)
         {
-            _timeChangeEvent.Invoke();
             yield return null;
+            _timeChangeEvent.Invoke();
             _currentTime -= Time.deltaTime;
         }
 
