@@ -16,6 +16,16 @@ public class Constants
 
     public static string FilePath = Application.persistentDataPath + "/level.fun";
     public const string PathToSprites = "Sprites/";
+
+    public static Dictionary<Difficulty, int> TimeForDifficulty = new Dictionary<Difficulty, int>()
+    {
+        { Difficulty.Easy, 30 },
+        { Difficulty.Medium, 50 },
+        { Difficulty.Hard, 80 }
+    };
+
+    public const string GammeSceneName = "GameScene";
+    public const string ArrangementGeneratorTag = "Arrangement Generator";
 }
 
 public enum Difficulty
