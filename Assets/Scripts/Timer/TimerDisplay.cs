@@ -5,15 +5,16 @@ using TMPro;
 
 public class TimerDisplay : MonoBehaviour
 {
-    public TextMeshProUGUI timerText;
+    private TextMeshProUGUI _timerText;
     public Timer Timer;
 
     void Start()
     {
-        if(timerText == null)
+        _timerText = GetComponent<TextMeshProUGUI>();
+        if(_timerText == null)
         {
             Destroy(this);
-            throw new MissingReferenceException("TextMeshProUGUI is not assigned.");
+            throw new MissingComponentException("TextMeshProUGUI is missing.");
         }
 
         if(Timer == null)
@@ -27,7 +28,7 @@ public class TimerDisplay : MonoBehaviour
 
     private void displayTime()
     {
-        timerText.text = string.Format("Time : {0}", (int)Timer.GetTime());
+        _timerText.text = string.Format("Time Remaining : {0}", (int)Timer.GetTime());
     }
 }
 

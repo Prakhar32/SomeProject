@@ -21,9 +21,9 @@ public class TimerDisplayTests
     public IEnumerator TimerCannotBeNull()
     {
         LogAssert.ignoreFailingMessages = true;
-        GameObject g = new GameObject();
+        GameObject g = new GameObject(); 
+        g.AddComponent<TextMeshProUGUI>();
         TimerDisplay display = g.AddComponent<TimerDisplay>();
-        display.timerText = g.AddComponent<TextMeshProUGUI>();
         yield return null;
 
         Assert.IsTrue(display == null);
@@ -34,18 +34,18 @@ public class TimerDisplayTests
     {
         //Given
         GameObject g = new GameObject();
+        g.AddComponent<TextMeshProUGUI>();
         TimerDisplay display = g.AddComponent<TimerDisplay>();
-        display.timerText = g.AddComponent<TextMeshProUGUI>();
         display.Timer = new Timer(display);
         yield return null;
 
         //When
         display.Timer.SetTimer(5f);
         display.Timer.StartTimer();
-        Assert.AreEqual("Time : 5", g.GetComponent<TextMeshProUGUI>().text);
+        Assert.AreEqual("Time Remaining : 5", g.GetComponent<TextMeshProUGUI>().text);
         yield return new WaitForSeconds(1f);
         
         //Then
-        Assert.AreEqual("Time : 4", g.GetComponent<TextMeshProUGUI>().text);
+        Assert.AreEqual("Time Remaining : 4", g.GetComponent<TextMeshProUGUI>().text);
     }
 }

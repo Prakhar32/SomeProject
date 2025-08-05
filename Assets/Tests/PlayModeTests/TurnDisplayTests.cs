@@ -44,7 +44,7 @@ public class TurnDisplayTests
         GameObject g3 = new GameObject();
         TurnCounterDisplay turn = g3.AddComponent<TurnCounterDisplay>();
         turn.TurnCounter = new TurnCounter(cardMatcher);
-        turn.Text = g3.AddComponent<TextMeshProUGUI>();
+        g3.AddComponent<TextMeshProUGUI>();
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
 
@@ -73,7 +73,7 @@ public class TurnDisplayTests
         GameObject g3 = new GameObject();
         TurnCounterDisplay turn = g3.AddComponent<TurnCounterDisplay>();
         turn.TurnCounter = new TurnCounter(cardMatcher);
-        turn.Text = g3.AddComponent<TextMeshProUGUI>();
+        g3.AddComponent<TextMeshProUGUI>();
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
 

@@ -4,7 +4,7 @@ using UnityEngine;
 public class TurnCounterDisplay : MonoBehaviour
 {
     public TurnCounter TurnCounter;
-    public TextMeshProUGUI Text;
+    private TextMeshProUGUI _text;
 
     void Start()
     {
@@ -14,7 +14,8 @@ public class TurnCounterDisplay : MonoBehaviour
             throw new MissingReferenceException("TurnCounter is not assigned.");
         }
 
-        if(Text == null)
+        _text = GetComponent<TextMeshProUGUI>();
+        if(_text == null)
         {
             Destroy(this);
             throw new MissingReferenceException("Text field cannot be null");
@@ -25,6 +26,6 @@ public class TurnCounterDisplay : MonoBehaviour
 
     private void displayTurn()
     {
-        Text.text = "Turn : " + TurnCounter.getTurn();
+        _text.text = "Turn : " + TurnCounter.getTurn();
     }
 }

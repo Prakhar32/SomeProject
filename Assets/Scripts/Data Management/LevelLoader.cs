@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelLoader : MonoBehaviour
 {
     public ArrangementGenerator Generator;
+    public Score score;
 
     private void Start()
     {
@@ -12,6 +13,12 @@ public class LevelLoader : MonoBehaviour
         {
             Destroy(this);
             throw new MissingReferenceException("ArrangementGenerator is not assigned.");
+        }
+
+        if(score == null)
+        {
+            Destroy(this);
+            throw new MissingReferenceException("Score cannot be null");
         }
     }
 

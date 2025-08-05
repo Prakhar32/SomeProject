@@ -1,12 +1,11 @@
 using NUnit.Framework;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.TestTools;
 
-public class TurnCounterTests : MonoBehaviour
+public class TurnCounterTests
 {
     [Test]
     public void CardMatcherIsNull()

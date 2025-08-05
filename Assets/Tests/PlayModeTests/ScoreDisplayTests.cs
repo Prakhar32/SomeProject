@@ -18,12 +18,12 @@ public class ScoreDisplayTests
     }
 
     [UnityTest]
-    public IEnumerator TextFieldCannotBeNull()
+    public IEnumerator TextMeshProComponentMissing()
     {
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
         ScoreDisplay scoreDisplay = g.AddComponent<ScoreDisplay>();
-        scoreDisplay.score = new Score(new CardMatcher());
+        scoreDisplay.Score = new Score(new CardMatcher());
         yield return null;
 
         Assert.IsTrue(scoreDisplay == null);
@@ -42,11 +42,11 @@ public class ScoreDisplayTests
         cardView1.FaceUpSprite = cardView2.FaceUpSprite;
 
 
-        GameObject g3 = new GameObject();
+        GameObject g3 = new GameObject(); 
+        g3.AddComponent<TextMeshProUGUI>();
         ScoreDisplay score = g3.AddComponent<ScoreDisplay>();
-        score.score = new Score(cardMatcher);
-        score.Text = g3.AddComponent<TextMeshProUGUI>();
-
+        score.Score = new Score(cardMatcher);
+        
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
 

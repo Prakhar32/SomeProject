@@ -15,7 +15,7 @@ public class TimerTests
         //Given
         GameObject gameObject = new GameObject();
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
-        timerDisplay.timerText = gameObject.AddComponent<TextMeshProUGUI>();
+        gameObject.AddComponent<TextMeshProUGUI>();
 
         Timer timer = new Timer(timerDisplay);
         timerDisplay.Timer = timer;
@@ -34,7 +34,7 @@ public class TimerTests
     {
         GameObject gameObject = new GameObject();
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
-        timerDisplay.timerText = gameObject.AddComponent<TextMeshProUGUI>();
+        gameObject.AddComponent<TextMeshProUGUI>();
         
         Timer timer = new Timer(timerDisplay);
         timerDisplay.Timer = timer; 
@@ -49,7 +49,7 @@ public class TimerTests
         //Given
         GameObject gameObject = new GameObject();
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
-        timerDisplay.timerText = gameObject.AddComponent<TextMeshProUGUI>();
+        gameObject.AddComponent<TextMeshProUGUI>();
         Timer timer = new Timer(timerDisplay); 
         timerDisplay.Timer = timer;
         yield return null;
@@ -73,7 +73,7 @@ public class TimerTests
         //Given
         GameObject gameObject = new GameObject();
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
-        timerDisplay.timerText = gameObject.AddComponent<TextMeshProUGUI>();
+        gameObject.AddComponent<TextMeshProUGUI>();
         Timer timer = new Timer(timerDisplay);
         timerDisplay.Timer = timer;
         yield return null;
