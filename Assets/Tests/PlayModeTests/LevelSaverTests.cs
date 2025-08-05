@@ -1,12 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using NUnit.Framework;
+using System.Collections;
+using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
 public class LevelSaverTests
 {
+    [UnitySetUp]
+    public IEnumerator LoadScene()
+    {
+        bool sceneLoaded = false;
+        SceneManager.sceneLoaded += (scene, mode) => { sceneLoaded = true; };
+        SceneManager.LoadScene(Constants.GammeSceneName);
+        yield return new WaitUntil(() => sceneLoaded);
+    }
+
     [UnityTest]
     public IEnumerator ArrangementParentNull()
     {
@@ -41,7 +50,8 @@ public class LevelSaverTests
         levelSaver.Score = new Score(new CardMatcher());
         levelSaver.SetDifficulty(Difficulty.Easy);
 
-        ArrangementGenerator arrangementGenerator = HelperMethods.GetArrangementGenerator();
+        ArrangementGenerator arrangementGenerator =
+            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
         levelSaver.ArrangementParent = arrangementGenerator.ArrangementParent;
         yield return null;
 

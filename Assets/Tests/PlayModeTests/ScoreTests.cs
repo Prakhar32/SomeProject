@@ -27,11 +27,11 @@ public class ScoreTests
     {
         //Given
         CardMatcher cardMatcher = new CardMatcher(); 
-        GameObject g1 = new GameObject();
-        CardView cardView1 = HelperMethods.ConvertGameobjectIntoCard(g1, cardMatcher);
+        GameObject g1 = HelperMethods.GetCard(cardMatcher);
+        CardView cardView1 = g1.GetComponent<CardView>();
 
-        GameObject g2 = new GameObject();
-        CardView cardView2 = HelperMethods.ConvertGameobjectIntoCard(g2, cardMatcher);
+        GameObject g2 = HelperMethods.GetCard(cardMatcher);
+        CardView cardView2 = g2.GetComponent<CardView>();
         cardView1.FaceUpSprite = cardView2.FaceUpSprite;
 
         Score score = new Score(cardMatcher);
@@ -54,11 +54,11 @@ public class ScoreTests
     {
         //Given
         CardMatcher cardMatcher = new CardMatcher();
-        GameObject g1 = new GameObject();
-        CardView cardView1 = HelperMethods.ConvertGameobjectIntoCard(g1, cardMatcher);
+        GameObject g1 = HelperMethods.GetCard(cardMatcher);
+        CardView cardView1 = g1.GetComponent<CardView>();
 
-        GameObject g2 = new GameObject();
-        CardView cardView2 = HelperMethods.ConvertGameobjectIntoCard(g2, cardMatcher);
+        GameObject g2 = HelperMethods.GetCard(cardMatcher);
+        CardView cardView2 = g2.GetComponent<CardView>();
         cardView1.FaceUpSprite = cardView2.FaceUpSprite;
 
         Score score = new Score(cardMatcher);
@@ -81,11 +81,11 @@ public class ScoreTests
     {
         //Given
         CardMatcher cardMatcher = new CardMatcher();
-        GameObject g1 = new GameObject();
-        CardView cardView1 = HelperMethods.ConvertGameobjectIntoCard(g1, cardMatcher);
+        GameObject g1 = HelperMethods.GetCard(cardMatcher);
+        CardView cardView1 = g1.GetComponent<CardView>();
 
-        GameObject g2 = new GameObject();
-        CardView cardView2 = HelperMethods.ConvertGameobjectIntoCard(g2, cardMatcher);
+        GameObject g2 = HelperMethods.GetCard(cardMatcher);
+        CardView cardView2 = g2.GetComponent<CardView>();
         cardView1.FaceUpSprite = cardView2.FaceUpSprite;
 
         Score score = new Score(cardMatcher);

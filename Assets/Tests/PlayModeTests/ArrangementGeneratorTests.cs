@@ -2,11 +2,21 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
 
 public class ArrangementGeneratorTests
 {
+    [UnitySetUp]
+    public IEnumerator LoadScene()
+    {
+        bool sceneLoaded = false;
+        SceneManager.sceneLoaded += (scene, mode) => { sceneLoaded = true; };
+        SceneManager.LoadScene(Constants.GammeSceneName);
+        yield return new WaitUntil(() => sceneLoaded);
+    }
+
     [UnityTest]
     public IEnumerator ArrangementParentNull()
     {
@@ -91,7 +101,7 @@ public class ArrangementGeneratorTests
         arrangementGenerator.CardMatcher = new CardMatcher();
         arrangementGenerator.CardPrefab = new GameObject();
         arrangementGenerator.CardSprites = HelperMethods.GetSprites();
-        arrangementGenerator.FaceDownSprite = HelperMethods.createSpriteStub();
+        arrangementGenerator.FaceDownSprite = HelperMethods.GetRandomSprite();
         yield return null;
 
         Assert.IsTrue(arrangementGenerator == null);
@@ -100,7 +110,8 @@ public class ArrangementGeneratorTests
     [UnityTest]
     public IEnumerator EasyDifficulty_6Elements()
     {
-        ArrangementGenerator arrangementGenerator = HelperMethods.GetArrangementGenerator();
+        ArrangementGenerator arrangementGenerator =
+            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
         yield return null;
 
         arrangementGenerator.GenerateArrangement(Difficulty.Easy);
@@ -112,7 +123,8 @@ public class ArrangementGeneratorTests
     [UnityTest]
     public IEnumerator MediumDifficulty_12Elements()
     {
-        ArrangementGenerator arrangementGenerator = HelperMethods.GetArrangementGenerator();
+        ArrangementGenerator arrangementGenerator =
+            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
         yield return null;
 
         arrangementGenerator.GenerateArrangement(Difficulty.Medium);
@@ -124,7 +136,8 @@ public class ArrangementGeneratorTests
     [UnityTest]
     public IEnumerator HardDifficulty_20Elements()
     {
-        ArrangementGenerator arrangementGenerator = HelperMethods.GetArrangementGenerator();
+        ArrangementGenerator arrangementGenerator =
+            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
         yield return null;
 
         arrangementGenerator.GenerateArrangement(Difficulty.Hard);
@@ -136,7 +149,8 @@ public class ArrangementGeneratorTests
     [UnityTest]
     public IEnumerator LevelGeneratedisSolvable()
     {
-        ArrangementGenerator arrangementGenerator = HelperMethods.GetArrangementGenerator();
+        ArrangementGenerator arrangementGenerator =
+            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
         yield return null;
 
         arrangementGenerator.GenerateArrangement(Difficulty.Hard);
@@ -163,7 +177,8 @@ public class ArrangementGeneratorTests
     public IEnumerator ResetEmptiesCards()
     {
         //Given
-        ArrangementGenerator arrangementGenerator = HelperMethods.GetArrangementGenerator();
+        ArrangementGenerator arrangementGenerator =
+            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
         yield return null;
         arrangementGenerator.GenerateArrangement(Difficulty.Easy);
         yield return null;

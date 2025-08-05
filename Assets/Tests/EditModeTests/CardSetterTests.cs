@@ -28,7 +28,7 @@ public class CardSetterTests
         //Given
         CardMatcher matcher = new CardMatcher();
         CardSetter cardSetter = new CardSetter(HelperMethods.GetSprites());
-        CardView cardView = HelperMethods.ConvertGameobjectIntoCard(new GameObject(), matcher);
+        CardView cardView = HelperMethods.GetCard(matcher).GetComponent<CardView>();
 
         //When
         cardSetter.SetupCards(new List<CardView>() { cardView, cardView});

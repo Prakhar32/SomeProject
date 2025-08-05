@@ -2,11 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
 
 public class LevelLoaderTests
 {
+    [UnitySetUp]
+    public IEnumerator LoadScene()
+    {
+        bool sceneLoaded = false;
+        SceneManager.sceneLoaded += (scene, mode) => { sceneLoaded = true; };
+        SceneManager.LoadScene(Constants.GammeSceneName);
+        yield return new WaitUntil(() => sceneLoaded);
+    }
+
     [UnityTest]
     public IEnumerator ArrangementGeneratorNull()
     {
@@ -19,18 +29,32 @@ public class LevelLoaderTests
     }
 
     [UnityTest]
+    public IEnumerator ScoreCannotBeNull()
+    {
+        LogAssert.ignoreFailingMessages = true;
+        
+        GameObject g = new GameObject();
+        LevelLoader levelLoader = g.AddComponent<LevelLoader>();
+        ArrangementGenerator arrangementGenerator = 
+            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
+        Debug.Log(GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).name);
+        levelLoader.Generator = arrangementGenerator;
+        yield return null;
+
+        Assert.IsTrue(levelLoader == null);
+    }
+
+    [UnityTest]
     public IEnumerator LevelLoaded()
     {
         //Given
-        ArrangementGenerator arrangementGenerator = HelperMethods.GetArrangementGenerator();
+        ArrangementGenerator arrangementGenerator =
+            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
 
-        LevelSaver levelSaver = new GameObject().AddComponent<LevelSaver>();
-        levelSaver.Score = new Score(arrangementGenerator.CardMatcher);
-        levelSaver.ArrangementParent = arrangementGenerator.ArrangementParent;
+        LevelSaver levelSaver = GameObject.FindAnyObjectByType<LevelSaver>();
         levelSaver.SetDifficulty(Difficulty.Easy);
 
-        LevelLoader levelLoader = new GameObject().AddComponent<LevelLoader>();
-        levelLoader.Generator = arrangementGenerator;
+        LevelLoader levelLoader = GameObject.FindAnyObjectByType<LevelLoader>();
         yield return null;
 
         arrangementGenerator.GenerateArrangement(Difficulty.Easy);

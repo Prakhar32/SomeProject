@@ -13,7 +13,7 @@ public class CardTests
         GameObject g = new GameObject();
 
         CardView card = g.AddComponent<CardView>();
-        card.FaceUpSprite = HelperMethods.createSpriteStub();
+        card.FaceUpSprite = HelperMethods.GetRandomSprite();
         yield return null;
         
         Assert.IsTrue(card == null);
@@ -37,7 +37,7 @@ public class CardTests
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
         CardView card = g.AddComponent<CardView>();
-        card.FaceUpSprite = HelperMethods.createSpriteStub();
+        card.FaceUpSprite = HelperMethods.GetRandomSprite();
         g.AddComponent<Image>();
 
         yield return null;
@@ -50,8 +50,8 @@ public class CardTests
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
         CardView card = g.AddComponent<CardView>();
-        card.FaceUpSprite = HelperMethods.createSpriteStub();
-        card.FaceDownSprite = HelperMethods.createSpriteStub();
+        card.FaceUpSprite = HelperMethods.GetRandomSprite();
+        card.FaceDownSprite = HelperMethods.GetRandomSprite();
         g.AddComponent<Image>();
 
         yield return null;
@@ -64,8 +64,8 @@ public class CardTests
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
         CardView card = g.AddComponent<CardView>();
-        card.FaceUpSprite = HelperMethods.createSpriteStub();
-        card.FaceDownSprite = HelperMethods.createSpriteStub();
+        card.FaceUpSprite = HelperMethods.GetRandomSprite();
+        card.FaceDownSprite = HelperMethods.GetRandomSprite();
         g.AddComponent<Image>();
         card.CardMatcher = new CardMatcher();
 
@@ -77,8 +77,8 @@ public class CardTests
     public IEnumerator Card_Initially_FaceUp()
     {
         //Given
-        GameObject g = new GameObject();
-        CardView card = HelperMethods.ConvertGameobjectIntoCard(g, new CardMatcher());
+        GameObject g = HelperMethods.GetCard(new CardMatcher());
+        CardView card = g.GetComponent<CardView>();
         yield return null;
 
         //Then
@@ -89,8 +89,8 @@ public class CardTests
     public IEnumerator CardFacedown_AfterSomeTime()
     {
         //Given
-        GameObject g = new GameObject();
-        CardView card = HelperMethods.ConvertGameobjectIntoCard(g, new CardMatcher());
+        GameObject g = HelperMethods.GetCard(new CardMatcher());
+        CardView card = g.GetComponent<CardView>();
         yield return null;
 
         //When
@@ -104,8 +104,8 @@ public class CardTests
     public IEnumerator Card_FaceUp_WhenClickingOn_FaceDownCard()
     {
         //Given
-        GameObject g = new GameObject();
-        CardView card = HelperMethods.ConvertGameobjectIntoCard(g, new CardMatcher());
+        GameObject g = HelperMethods.GetCard(new CardMatcher());
+        CardView card = g.GetComponent<CardView>();
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
         
@@ -120,8 +120,8 @@ public class CardTests
     public IEnumerator StateRestoredOnLoadingMemento()
     {
         //Given
-        GameObject g = new GameObject();
-        CardView card = HelperMethods.ConvertGameobjectIntoCard(g, new CardMatcher());
+        GameObject g = HelperMethods.GetCard(new CardMatcher());
+        CardView card = g.GetComponent<CardView>();
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
         

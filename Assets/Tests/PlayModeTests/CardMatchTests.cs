@@ -14,20 +14,20 @@ public class CardMatchTests
         //Given
         CardMatcher matcher = new CardMatcher();
 
-        GameObject g1 = new GameObject();
-        CardView card1 = HelperMethods.ConvertGameobjectIntoCard(g1, matcher);
+        GameObject g1 = HelperMethods.GetCard(matcher);
+        CardView cardView1 = g1.GetComponent<CardView>();
 
-        GameObject g2 = new GameObject();
-        CardView card2 = HelperMethods.ConvertGameobjectIntoCard(g2, matcher);
-        card2.CardMatcher = matcher;
+        GameObject g2 = HelperMethods.GetCard(matcher);
+        CardView cardView2 = g2.GetComponent<CardView>();
+        cardView2.CardMatcher = matcher;
 
-        card2.FaceUpSprite = card1.FaceUpSprite;
+        cardView2.FaceUpSprite = cardView1.FaceUpSprite;
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
 
         //When
-        card1.Selected();
-        card2.Selected();
+        cardView1.Selected();
+        cardView2.Selected();
         yield return null;
 
         //Then
@@ -42,19 +42,19 @@ public class CardMatchTests
         //Given
         CardMatcher matcher = new CardMatcher();
 
-        GameObject g1 = new GameObject();
-        CardView card1 = HelperMethods.ConvertGameobjectIntoCard(g1, matcher);
+        GameObject g1 = HelperMethods.GetCard(matcher);
+        CardView cardView1 = g1.GetComponent<CardView>();
 
-        GameObject g2 = new GameObject();
-        CardView card2 = HelperMethods.ConvertGameobjectIntoCard(g2, matcher);
+        GameObject g2 = HelperMethods.GetCard(matcher);
+        CardView cardView2 = g2.GetComponent<CardView>();
 
-        card2.FaceUpSprite = card1.FaceUpSprite;
+        cardView2.FaceUpSprite = cardView1.FaceUpSprite;
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
 
         //When
-        card1.Selected();
-        card2.Selected();
+        cardView1.Selected();
+        cardView2.Selected();
 
         //Then
         yield return null;
@@ -72,23 +72,23 @@ public class CardMatchTests
         //Given
         CardMatcher matcher = new CardMatcher();
 
-        GameObject g1 = new GameObject();
-        CardView card1 = HelperMethods.ConvertGameobjectIntoCard(g1, matcher);
+        GameObject g1 = HelperMethods.GetCard(matcher);
+        CardView cardView1 = g1.GetComponent<CardView>();
 
-        GameObject g2 = new GameObject();
-        CardView card2 = HelperMethods.ConvertGameobjectIntoCard(g2, matcher);
+        GameObject g2 = HelperMethods.GetCard(matcher);
+        CardView cardView2 = g2.GetComponent<CardView>();
 
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
 
         //When
-        card1.Selected();
-        card2.Selected();
+        cardView1.Selected();
+        cardView2.Selected();
 
         //Then
         yield return new WaitForSeconds (Constants.ResetTime);
-        Assert.IsTrue(g1.GetComponent<Image>().sprite = card1.FaceDownSprite);
-        Assert.IsTrue(g2.GetComponent<Image>().sprite = card2.FaceDownSprite);
+        Assert.IsTrue(g1.GetComponent<Image>().sprite = cardView1.FaceDownSprite);
+        Assert.IsTrue(g2.GetComponent<Image>().sprite = cardView2.FaceDownSprite);
     }
 
     [UnityTest]
@@ -97,26 +97,26 @@ public class CardMatchTests
         //Given
         CardMatcher matcher = new CardMatcher();
 
-        GameObject g1 = new GameObject();
-        CardView card1 = HelperMethods.ConvertGameobjectIntoCard(g1, matcher);
-        
-        GameObject g2 = new GameObject();
-        CardView card2 = HelperMethods.ConvertGameobjectIntoCard(g2, matcher);
+        GameObject g1 = HelperMethods.GetCard(matcher);
+        CardView cardView1 = g1.GetComponent<CardView>();
+
+        GameObject g2 = HelperMethods.GetCard(matcher);
+        CardView cardView2 = g2.GetComponent<CardView>();
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
 
         //When
-        card1.Selected();
-        card2.Selected();
+        cardView1.Selected();
+        cardView2.Selected();
         
         //Then
         yield return null;
-        Assert.IsTrue(g1.GetComponent<Image>().sprite == card1.FaceUpSprite);
-        Assert.IsTrue(g2.GetComponent<Image>().sprite == card2.FaceUpSprite);
+        Assert.IsTrue(g1.GetComponent<Image>().sprite == cardView1.FaceUpSprite);
+        Assert.IsTrue(g2.GetComponent<Image>().sprite == cardView2.FaceUpSprite);
         
         yield return new WaitForSeconds(Constants.ResetTime);
-        Assert.IsTrue(g1.GetComponent<Image>().sprite == card1.FaceDownSprite);
-        Assert.IsTrue(g2.GetComponent<Image>().sprite == card2.FaceDownSprite);
+        Assert.IsTrue(g1.GetComponent<Image>().sprite == cardView1.FaceDownSprite);
+        Assert.IsTrue(g2.GetComponent<Image>().sprite == cardView2.FaceDownSprite);
     }
 
     [UnityTest]
@@ -126,8 +126,8 @@ public class CardMatchTests
         CardMatcher cardMatcher = new CardMatcher();
         bool matchSuccessful = false;
         cardMatcher.SubscribeToSuccessfulMatch(() => matchSuccessful = true);
-        CardView cardView1 = HelperMethods.ConvertGameobjectIntoCard(new GameObject(), cardMatcher);
-        CardView cardView2 = HelperMethods.ConvertGameobjectIntoCard(new GameObject(), cardMatcher);
+        CardView cardView1 = HelperMethods.GetCard(cardMatcher).GetComponent<CardView>();
+        CardView cardView2 = HelperMethods.GetCard(cardMatcher).GetComponent<CardView>();
         cardView1.FaceUpSprite = cardView2.FaceUpSprite;
 
         yield return null;
@@ -150,8 +150,8 @@ public class CardMatchTests
         UnityAction action = () => matchSuccessful = true;
         cardMatcher.SubscribeToSuccessfulMatch(action);
         
-        CardView cardView1 = HelperMethods.ConvertGameobjectIntoCard(new GameObject(), cardMatcher);
-        CardView cardView2 = HelperMethods.ConvertGameobjectIntoCard(new GameObject(), cardMatcher);
+        CardView cardView1 = HelperMethods.GetCard(cardMatcher).GetComponent<CardView>();
+        CardView cardView2 = HelperMethods.GetCard(cardMatcher).GetComponent<CardView>();
         cardView1.FaceUpSprite = cardView2.FaceUpSprite;
         
         yield return null;
@@ -174,8 +174,8 @@ public class CardMatchTests
         CardMatcher cardMatcher = new CardMatcher();
         bool matchFailed = false;
         cardMatcher.SubscribeToUnsuccessfulMatch(() => matchFailed = true);
-        CardView cardView1 = HelperMethods.ConvertGameobjectIntoCard(new GameObject(), cardMatcher);
-        CardView cardView2 = HelperMethods.ConvertGameobjectIntoCard(new GameObject(), cardMatcher);
+        CardView cardView1 = HelperMethods.GetCard(cardMatcher).GetComponent<CardView>();
+        CardView cardView2 = HelperMethods.GetCard(cardMatcher).GetComponent<CardView>();
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
 
@@ -196,8 +196,8 @@ public class CardMatchTests
         UnityAction action = () => matchFailed = true;
         cardMatcher.SubscribeToUnsuccessfulMatch(action);
 
-        CardView cardView1 = HelperMethods.ConvertGameobjectIntoCard(new GameObject(), cardMatcher);
-        CardView cardView2 = HelperMethods.ConvertGameobjectIntoCard(new GameObject(), cardMatcher);
+        CardView cardView1 = HelperMethods.GetCard(cardMatcher).GetComponent<CardView>();
+        CardView cardView2 = HelperMethods.GetCard(cardMatcher).GetComponent<CardView>();
 
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);

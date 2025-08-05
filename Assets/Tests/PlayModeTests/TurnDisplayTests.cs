@@ -34,17 +34,17 @@ public class TurnDisplayTests
     {
         //Given
         CardMatcher cardMatcher = new CardMatcher();
-        GameObject g1 = new GameObject();
-        CardView cardView1 = HelperMethods.ConvertGameobjectIntoCard(g1, cardMatcher);
+        GameObject g1 = HelperMethods.GetCard(cardMatcher);
+        CardView cardView1 = g1.GetComponent<CardView>();
 
-        GameObject g2 = new GameObject();
-        CardView cardView2 = HelperMethods.ConvertGameobjectIntoCard(g2, cardMatcher);
-        
+        GameObject g2 = HelperMethods.GetCard(cardMatcher);
+        CardView cardView2 = g2.GetComponent<CardView>();
 
         GameObject g3 = new GameObject();
         TurnCounterDisplay turn = g3.AddComponent<TurnCounterDisplay>();
         turn.TurnCounter = new TurnCounter(cardMatcher);
         g3.AddComponent<TextMeshProUGUI>();
+
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
 
@@ -62,11 +62,11 @@ public class TurnDisplayTests
     {
         //Given
         CardMatcher cardMatcher = new CardMatcher();
-        GameObject g1 = new GameObject();
-        CardView cardView1 = HelperMethods.ConvertGameobjectIntoCard(g1, cardMatcher);
+        GameObject g1 = HelperMethods.GetCard(cardMatcher);
+        CardView cardView1 = g1.GetComponent<CardView>();
 
-        GameObject g2 = new GameObject();
-        CardView cardView2 = HelperMethods.ConvertGameobjectIntoCard(g2, cardMatcher);
+        GameObject g2 = HelperMethods.GetCard(cardMatcher);
+        CardView cardView2 = g2.GetComponent<CardView>();
         
         cardView1.FaceUpSprite = cardView2.FaceUpSprite;
 

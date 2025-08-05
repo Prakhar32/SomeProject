@@ -11,8 +11,8 @@ public class DataSaverTests
     public IEnumerator SaveData()
     {
         //Given
-        GameObject g = new GameObject();
-        CardView cardView = HelperMethods.ConvertGameobjectIntoCard(g, new CardMatcher());
+        GameObject g = HelperMethods.GetCard(new CardMatcher());
+        CardView cardView = g.GetComponent<CardView>();
         cardView.FaceUpSprite = HelperMethods.GetRandomSprite();
         yield return null;
 
