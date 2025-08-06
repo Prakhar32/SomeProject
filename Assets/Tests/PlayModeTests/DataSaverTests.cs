@@ -22,7 +22,7 @@ public class DataSaverTests
             mementos.Add(i, cardView.SaveState());
 
         //When
-        DataSaver.SaveData(Difficulty.Easy, mementos);
+        DataSaver.SaveData(Difficulty.Easy, mementos, 0, 1, Constants.TimeForDifficulty[Difficulty.Easy]);
 
         //Then
         Assert.IsTrue(File.Exists(Constants.FilePath));

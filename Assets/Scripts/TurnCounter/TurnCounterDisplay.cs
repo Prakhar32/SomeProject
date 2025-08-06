@@ -26,6 +26,6 @@ public class TurnCounterDisplay : MonoBehaviour
 
     private void displayTurn()
     {
-        _text.text = "Turn : " + TurnCounter.getTurn();
+        _text.text = "Turn : " + TurnCounter.getTurnCounter();
     }
 }

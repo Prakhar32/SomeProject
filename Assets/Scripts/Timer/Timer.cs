@@ -18,7 +18,12 @@ public class Timer
         _timeChangeEvent = new UnityEvent();
     }
 
-    public void SetTimer(float time)
+    public void SetDifficulty(Difficulty difficulty)
+    {
+        SetTimer(Constants.TimeForDifficulty[difficulty]);
+    }
+
+    internal void SetTimer(float time)
     {
         _currentTime = time;
         _mono.StopCoroutine(reduceTime());

@@ -21,7 +21,13 @@ public class TurnCounter
         _turnChangeEvent.Invoke();
     }
 
-    public int getTurn()
+    internal void setTurnCounter(int turn)
+    {
+        _turn = turn;
+        _turnChangeEvent.Invoke();
+    }
+
+    public int getTurnCounter()
     {
         return _turn;
     }

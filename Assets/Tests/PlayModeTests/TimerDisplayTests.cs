@@ -40,12 +40,13 @@ public class TimerDisplayTests
         yield return null;
 
         //When
-        display.Timer.SetTimer(5f);
+        display.Timer.SetDifficulty(Difficulty.Easy);
+        int currentTime = (int)display.Timer.GetTime();
         display.Timer.StartTimer();
-        Assert.AreEqual("Time Remaining : 5", g.GetComponent<TextMeshProUGUI>().text);
+        Assert.AreEqual(string.Format("Time Remaining : {0}", currentTime), g.GetComponent<TextMeshProUGUI>().text);
         yield return new WaitForSeconds(1f);
         
         //Then
-        Assert.AreEqual("Time Remaining : 4", g.GetComponent<TextMeshProUGUI>().text);
+        Assert.AreEqual(string.Format("Time Remaining : {0}", currentTime - 1), g.GetComponent<TextMeshProUGUI>().text);
     }
 }

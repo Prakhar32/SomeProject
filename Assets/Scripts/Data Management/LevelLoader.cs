@@ -6,6 +6,8 @@ public class LevelLoader : MonoBehaviour
 {
     public ArrangementGenerator Generator;
     public Score score;
+    public TurnCounter turnCounter;
+    public Timer timer;
 
     private void Start()
     {
@@ -20,12 +22,28 @@ public class LevelLoader : MonoBehaviour
             Destroy(this);
             throw new MissingReferenceException("Score cannot be null");
         }
+
+        if(turnCounter == null)
+        {
+            Destroy(this);
+            throw new MissingReferenceException("Turn Counter cannot be null");
+        }
+
+        if(timer == null)
+        {
+            Destroy(this);
+            throw new MissingReferenceException("Timer cannot be null");
+        }
     }
 
     public void LoadLevel()
     {
         LevelData data = DataLoader.LoadData();
         Generator.GenerateArrangement(data.Difficulty);
+        score.setScore(data.Score);
+        turnCounter.setTurnCounter(data.Turn);
+        timer.SetTimer(data.TimeRemaining);
+
         StartCoroutine(assignData(data.CardData));
     }
 

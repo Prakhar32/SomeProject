@@ -40,14 +40,41 @@ public class LevelSaverTests
     }
 
     [UnityTest]
+    public IEnumerator TurnCounterCannotBeNull()
+    {
+        LogAssert.ignoreFailingMessages = true;
+        GameObject g = new GameObject();
+        LevelSaver levelSaver = g.AddComponent<LevelSaver>();
+        levelSaver.ArrangementParent = new GameObject().transform;
+        levelSaver.Score = new Score(new CardMatcher());
+        yield return null;
+
+        Assert.IsTrue(levelSaver == null);
+    }
+
+    [UnityTest]
+    public IEnumerator TimerCannotBeNull()
+    {
+        LogAssert.ignoreFailingMessages = true;
+        CardMatcher matcher = new CardMatcher();
+        GameObject g = new GameObject();
+        LevelSaver levelSaver = g.AddComponent<LevelSaver>();
+        levelSaver.ArrangementParent = new GameObject().transform;
+        levelSaver.Score = new Score(matcher);
+        levelSaver.TurnCounter = new TurnCounter(matcher);
+
+        yield return null;
+
+        Assert.IsTrue(levelSaver == null);
+    }
+
+    [UnityTest]
     public IEnumerator SaveSuccessful()
     {
         //Given
         File.Delete(Constants.FilePath);
         
-        GameObject g = new GameObject();
-        LevelSaver levelSaver = g.AddComponent<LevelSaver>();
-        levelSaver.Score = new Score(new CardMatcher());
+        LevelSaver levelSaver = GameObject.FindObjectOfType<LevelSaver>();
         levelSaver.SetDifficulty(Difficulty.Easy);
 
         ArrangementGenerator arrangementGenerator =

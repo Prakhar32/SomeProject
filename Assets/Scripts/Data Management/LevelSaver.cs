@@ -6,6 +6,8 @@ public class LevelSaver : MonoBehaviour
 {
     public Transform ArrangementParent;
     public Score Score;
+    public TurnCounter TurnCounter;
+    public Timer Timer;
 
     private Difficulty _difficulty;
     
@@ -27,13 +29,25 @@ public class LevelSaver : MonoBehaviour
             Destroy(this);
             throw new MissingReferenceException("Score cannot be null");
         }
+
+        if(TurnCounter == null)
+        {
+            Destroy(this);
+            throw new MissingReferenceException("Turn Counter cannot be null");
+        }
+
+        if(Timer == null)
+        {
+            Destroy(this);
+            throw new MissingReferenceException("Timer cannot be null");
+        }
     }
 
     public void SaveLevel()
     {
         List<CardView> cardViews = getAllCards();
         Dictionary<int, CardMemeto> mementos = GetMementos(cardViews);
-        DataSaver.SaveData(_difficulty, mementos);
+        DataSaver.SaveData(_difficulty, mementos, Score.getScore(), TurnCounter.getTurnCounter(), (int)Timer.GetTime());
     }
 
     private Dictionary<int, CardMemeto> GetMementos(List<CardView> cardViews)

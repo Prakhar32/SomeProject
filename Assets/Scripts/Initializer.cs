@@ -22,16 +22,30 @@ public class Initializer : MonoBehaviour
         _cardMatcher = new CardMatcher();
         _score = new Score(_cardMatcher);
         _turnCounter = new TurnCounter(_cardMatcher);
-        _timer = new Timer(this);
+        _timer = new Timer(timerDisplay);
 
         arrangementGenerator.CardMatcher = _cardMatcher;
         scoreDisplay.Score = _score;
         turnCounterDisplay.TurnCounter = _turnCounter;
         timerDisplay.Timer = _timer;
 
+        initialiseLevelLoader();
+        initialiseLevelSaver();
+    }
+
+    private void initialiseLevelLoader()
+    {
         levelLoader.Generator = arrangementGenerator;
         levelLoader.score = _score;
+        levelLoader.turnCounter = _turnCounter;
+        levelLoader.timer = _timer;
+    }
+
+    private void initialiseLevelSaver()
+    {
         levelSaver.ArrangementParent = arrangementGenerator.transform;
         levelSaver.Score = _score;
+        levelSaver.TurnCounter = _turnCounter;
+        levelSaver.Timer = _timer;
     }
 }

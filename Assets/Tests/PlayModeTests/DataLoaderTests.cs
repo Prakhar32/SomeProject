@@ -25,7 +25,13 @@ public class DataLoaderTests
         yield return null;
 
         //When
-        DataSaver.SaveData(Difficulty.Easy, new Dictionary<int, CardMemeto>{ { 0, cardView.SaveState() } });
+        DataSaver.SaveData(
+            Difficulty.Easy, 
+            new Dictionary<int, CardMemeto>{ { 0, cardView.SaveState() } },
+            0,
+            1,
+            Constants.TimeForDifficulty[Difficulty.Easy]);
+
         cardView.Selected();
         LevelData data = DataLoader.LoadData();
         cardView.LoadState(data.CardData[0]);

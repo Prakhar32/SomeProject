@@ -21,12 +21,13 @@ public class TimerTests
         timerDisplay.Timer = timer;
 
         //When
-        timer.SetTimer(2f);
+        timer.SetDifficulty(Difficulty.Easy);
+        float currentTime = timer.GetTime();
         timer.StartTimer();
         yield return new WaitForSeconds(2f);
 
         //Then
-        Assert.IsTrue(timer.GetTime() == 0);
+        Assert.AreEqual(timer.GetTime(), currentTime - 2, 0.001f);
     }
 
     [UnityTest]
@@ -57,7 +58,7 @@ public class TimerTests
         bool timeChanged = false;
         UnityAction action = () => timeChanged = true;
         timer.SubscibeToTimeChange(action);
-        timer.SetTimer(2f);
+        timer.SetDifficulty(Difficulty.Easy);
         timer.StartTimer();
 
         //When
@@ -81,7 +82,7 @@ public class TimerTests
         bool timeChanged = false;
         UnityAction action = () => timeChanged = true;
         timer.SubscibeToTimeChange(action);
-        timer.SetTimer(2f);
+        timer.SetDifficulty(Difficulty.Easy);
 
         timer.UnsubscribeFromTimeChange(action);
         timer.StartTimer();

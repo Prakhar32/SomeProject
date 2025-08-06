@@ -18,7 +18,7 @@ public class TurnCounterTests
     {
         CardMatcher cardMatcher = new CardMatcher();
         TurnCounter score = new TurnCounter(cardMatcher);
-        Assert.IsTrue(score.getTurn() == 1);
+        Assert.IsTrue(score.getTurnCounter() == 1);
     }
 
     [UnityTest]
@@ -34,7 +34,7 @@ public class TurnCounterTests
         cardView1.FaceUpSprite = cardView2.FaceUpSprite;
 
         TurnCounter turn = new TurnCounter(cardMatcher);
-        int initialTurn = turn.getTurn();
+        int initialTurn = turn.getTurnCounter();
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
 
@@ -44,7 +44,7 @@ public class TurnCounterTests
         yield return null;
 
         //Then
-        int newScore = turn.getTurn();
+        int newScore = turn.getTurnCounter();
         Assert.IsTrue(initialTurn + 1 == newScore);
     }
 
@@ -60,7 +60,7 @@ public class TurnCounterTests
         CardView cardView2 = g2.GetComponent<CardView>();
 
         TurnCounter turn = new TurnCounter(cardMatcher);
-        int initialTurn = turn.getTurn();
+        int initialTurn = turn.getTurnCounter();
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);
 
@@ -70,7 +70,7 @@ public class TurnCounterTests
         yield return null;
 
         //Then
-        int newScore = turn.getTurn();
+        int newScore = turn.getTurnCounter();
         Assert.IsTrue(initialTurn + 1 == newScore);
     }
 
