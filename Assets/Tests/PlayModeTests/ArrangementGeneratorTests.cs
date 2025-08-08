@@ -110,8 +110,7 @@ public class ArrangementGeneratorTests
     [UnityTest]
     public IEnumerator EasyDifficulty_6Elements()
     {
-        ArrangementGenerator arrangementGenerator =
-            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
+        ArrangementGenerator arrangementGenerator = GameObject.FindObjectOfType<ArrangementGenerator>();
         yield return null;
 
         arrangementGenerator.GenerateArrangement(Difficulty.Easy);
@@ -123,8 +122,7 @@ public class ArrangementGeneratorTests
     [UnityTest]
     public IEnumerator MediumDifficulty_12Elements()
     {
-        ArrangementGenerator arrangementGenerator =
-            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
+        ArrangementGenerator arrangementGenerator = GameObject.FindObjectOfType<ArrangementGenerator>();
         yield return null;
 
         arrangementGenerator.GenerateArrangement(Difficulty.Medium);
@@ -136,8 +134,7 @@ public class ArrangementGeneratorTests
     [UnityTest]
     public IEnumerator HardDifficulty_20Elements()
     {
-        ArrangementGenerator arrangementGenerator =
-            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
+        ArrangementGenerator arrangementGenerator = GameObject.FindObjectOfType<ArrangementGenerator>();
         yield return null;
 
         arrangementGenerator.GenerateArrangement(Difficulty.Hard);
@@ -149,8 +146,7 @@ public class ArrangementGeneratorTests
     [UnityTest]
     public IEnumerator LevelGeneratedisSolvable()
     {
-        ArrangementGenerator arrangementGenerator =
-            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
+        ArrangementGenerator arrangementGenerator = GameObject.FindObjectOfType<ArrangementGenerator>();
         yield return null;
 
         arrangementGenerator.GenerateArrangement(Difficulty.Hard);
@@ -177,8 +173,7 @@ public class ArrangementGeneratorTests
     public IEnumerator ResetEmptiesCards()
     {
         //Given
-        ArrangementGenerator arrangementGenerator =
-            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
+        ArrangementGenerator arrangementGenerator = GameObject.FindObjectOfType<ArrangementGenerator>();
         yield return null;
         arrangementGenerator.GenerateArrangement(Difficulty.Easy);
         yield return null;

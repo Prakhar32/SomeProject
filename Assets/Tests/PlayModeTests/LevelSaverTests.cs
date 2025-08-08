@@ -74,8 +74,7 @@ public class LevelSaverTests
         LevelSaver levelSaver = GameObject.FindObjectOfType<LevelSaver>();
         levelSaver.SetDifficulty(Difficulty.Easy);
 
-        ArrangementGenerator arrangementGenerator =
-            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
+        ArrangementGenerator arrangementGenerator = GameObject.FindObjectOfType<ArrangementGenerator>();
         yield return null;
 
         arrangementGenerator.GenerateArrangement(Difficulty.Easy);

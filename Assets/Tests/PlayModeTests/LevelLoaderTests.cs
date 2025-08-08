@@ -36,8 +36,7 @@ public class LevelLoaderTests
       
         GameObject g = new GameObject();
         LevelLoader levelLoader = g.AddComponent<LevelLoader>();
-        ArrangementGenerator arrangementGenerator = 
-            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
+        ArrangementGenerator arrangementGenerator = GameObject.FindObjectOfType<ArrangementGenerator>();
         
         levelLoader.SetDependencies(arrangementGenerator, null, null, null);
         yield return null;
@@ -51,8 +50,7 @@ public class LevelLoaderTests
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
         LevelLoader levelLoader = g.AddComponent<LevelLoader>();
-        ArrangementGenerator arrangementGenerator =
-            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
+        ArrangementGenerator arrangementGenerator = GameObject.FindObjectOfType<ArrangementGenerator>();
 
         levelLoader.SetDependencies(arrangementGenerator, new Score(new CardMatcher()), null, null);
         yield return null;
@@ -67,8 +65,7 @@ public class LevelLoaderTests
         CardMatcher cardMatcher = new CardMatcher();
         GameObject g = new GameObject();
         LevelLoader levelLoader = g.AddComponent<LevelLoader>();
-        ArrangementGenerator arrangementGenerator =
-            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
+        ArrangementGenerator arrangementGenerator = GameObject.FindObjectOfType<ArrangementGenerator>();
 
         levelLoader.SetDependencies(arrangementGenerator, new Score(cardMatcher), new TurnCounter(cardMatcher), null);
        yield return null;
@@ -80,8 +77,7 @@ public class LevelLoaderTests
     public IEnumerator LevelLoaded()
     {
         //Given
-        ArrangementGenerator arrangementGenerator =
-            GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
+        ArrangementGenerator arrangementGenerator = GameObject.FindObjectOfType<ArrangementGenerator>();
         TurnCounterDisplay turnDisplay = GameObject.FindObjectOfType<TurnCounterDisplay>();
         ScoreDisplay scoreDisplay = GameObject.FindObjectOfType<ScoreDisplay>();
         TimerDisplay timerDisplay = GameObject.FindObjectOfType<TimerDisplay>();
