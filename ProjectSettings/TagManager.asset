@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Arrangement Generator
+  - Game Panel
+  - Difficulty Selection
   layers:
   - Default
   - TransparentFX

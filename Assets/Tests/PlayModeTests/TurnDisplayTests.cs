@@ -23,7 +23,7 @@ public class TurnDisplayTests
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
         TurnCounterDisplay turn = g.AddComponent<TurnCounterDisplay>();
-        turn.TurnCounter = new TurnCounter(new CardMatcher());
+        turn.SetTurnCounter(new TurnCounter(new CardMatcher()));
         yield return null;
         
         Assert.IsTrue(turn == null);
@@ -42,7 +42,7 @@ public class TurnDisplayTests
 
         GameObject g3 = new GameObject();
         TurnCounterDisplay turn = g3.AddComponent<TurnCounterDisplay>();
-        turn.TurnCounter = new TurnCounter(cardMatcher);
+        turn.SetTurnCounter(new TurnCounter(cardMatcher));
         g3.AddComponent<TextMeshProUGUI>();
 
         yield return null;
@@ -72,7 +72,7 @@ public class TurnDisplayTests
 
         GameObject g3 = new GameObject();
         TurnCounterDisplay turn = g3.AddComponent<TurnCounterDisplay>();
-        turn.TurnCounter = new TurnCounter(cardMatcher);
+        turn.SetTurnCounter(new TurnCounter(cardMatcher));
         g3.AddComponent<TextMeshProUGUI>();
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);

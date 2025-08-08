@@ -6,7 +6,9 @@ using TMPro;
 public class TimerDisplay : MonoBehaviour
 {
     private TextMeshProUGUI _timerText;
-    public Timer Timer;
+    private Timer _timer;
+
+    public void SetTimer(Timer timer) {  _timer = timer; }
 
     void Start()
     {
@@ -17,18 +19,18 @@ public class TimerDisplay : MonoBehaviour
             throw new MissingComponentException("TextMeshProUGUI is missing.");
         }
 
-        if(Timer == null)
+        if(_timer == null)
         {
             Destroy(this);
             throw new MissingReferenceException("Timer is not assigned.");
         }
 
-        Timer.SubscibeToTimeChange(displayTime);
+        _timer.SubscibeToTimeChange(displayTime);
     }
 
     private void displayTime()
     {
-        _timerText.text = string.Format("Time Remaining : {0}", (int)Timer.GetTime());
+        _timerText.text = string.Format("Time Remaining : {0}", (int)_timer.GetTime());
     }
 }
 

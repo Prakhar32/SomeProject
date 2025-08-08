@@ -23,7 +23,7 @@ public class ScoreDisplayTests
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
         ScoreDisplay scoreDisplay = g.AddComponent<ScoreDisplay>();
-        scoreDisplay.Score = new Score(new CardMatcher());
+        scoreDisplay.SetScore(new Score(new CardMatcher()));
         yield return null;
 
         Assert.IsTrue(scoreDisplay == null);
@@ -45,7 +45,7 @@ public class ScoreDisplayTests
         GameObject g3 = new GameObject(); 
         g3.AddComponent<TextMeshProUGUI>();
         ScoreDisplay score = g3.AddComponent<ScoreDisplay>();
-        score.Score = new Score(cardMatcher);
+        score.SetScore(new Score(cardMatcher));
         
         yield return null;
         yield return new WaitForSeconds(Constants.ViewTime);

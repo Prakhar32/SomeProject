@@ -6,12 +6,14 @@ using TMPro;
 
 public class ScoreDisplay : MonoBehaviour
 {
-    public Score Score;
+    private Score _score;
     private TextMeshProUGUI _text;
+
+    public void SetScore(Score score) {  _score = score; }
 
     void Start()
     {
-        if(Score == null)
+        if(_score == null)
         {
             Destroy(this);
             throw new NullReferenceException("Score cannot be null");
@@ -24,11 +26,11 @@ public class ScoreDisplay : MonoBehaviour
             throw new NullReferenceException("Text field cannot be null");
         }
 
-        Score.SubscribeToScoreChange(displaytext);
+        _score.SubscribeToScoreChange(displaytext);
     }
 
     private void displaytext()
     {
-        _text.text = "Score : " + Score.getScore();
+        _text.text = "Score : " + _score.getScore();
     }
 }

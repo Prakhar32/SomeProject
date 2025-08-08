@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class TurnCounterDisplay : MonoBehaviour
 {
-    public TurnCounter TurnCounter;
+    private TurnCounter _turnCounter;
     private TextMeshProUGUI _text;
+
+    public void SetTurnCounter(TurnCounter turnCounter) {  _turnCounter = turnCounter; }
 
     void Start()
     {
-        if(TurnCounter == null)
+        if(_turnCounter == null)
         {
             Destroy(this);
             throw new MissingReferenceException("TurnCounter is not assigned.");
@@ -21,11 +23,11 @@ public class TurnCounterDisplay : MonoBehaviour
             throw new MissingReferenceException("Text field cannot be null");
         }
 
-        TurnCounter.SubscribeToTurnChange(displayTurn);
+        _turnCounter.SubscribeToTurnChange(displayTurn);
     }
 
     private void displayTurn()
     {
-        _text.text = "Turn : " + TurnCounter.getTurnCounter();
+        _text.text = "Turn : " + _turnCounter.getTurnCounter();
     }
 }

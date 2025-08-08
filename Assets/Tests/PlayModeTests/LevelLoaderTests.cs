@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
@@ -38,7 +39,7 @@ public class LevelLoaderTests
         ArrangementGenerator arrangementGenerator = 
             GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
         
-        levelLoader.Generator = arrangementGenerator;
+        levelLoader.SetDependencies(arrangementGenerator, null, null, null);
         yield return null;
 
         Assert.IsTrue(levelLoader == null);
@@ -53,8 +54,7 @@ public class LevelLoaderTests
         ArrangementGenerator arrangementGenerator =
             GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
 
-        levelLoader.Generator = arrangementGenerator;
-        levelLoader.score = new Score(new CardMatcher());
+        levelLoader.SetDependencies(arrangementGenerator, new Score(new CardMatcher()), null, null);
         yield return null;
 
         Assert.IsTrue(levelLoader == null);
@@ -70,10 +70,8 @@ public class LevelLoaderTests
         ArrangementGenerator arrangementGenerator =
             GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
 
-        levelLoader.Generator = arrangementGenerator;
-        levelLoader.score = new Score(cardMatcher);
-        levelLoader.turnCounter = new TurnCounter(cardMatcher);
-        yield return null;
+        levelLoader.SetDependencies(arrangementGenerator, new Score(cardMatcher), new TurnCounter(cardMatcher), null);
+       yield return null;
 
         Assert.IsTrue(levelLoader == null);
     }
@@ -84,6 +82,9 @@ public class LevelLoaderTests
         //Given
         ArrangementGenerator arrangementGenerator =
             GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
+        TurnCounterDisplay turnDisplay = GameObject.FindObjectOfType<TurnCounterDisplay>();
+        ScoreDisplay scoreDisplay = GameObject.FindObjectOfType<ScoreDisplay>();
+        TimerDisplay timerDisplay = GameObject.FindObjectOfType<TimerDisplay>();
 
         LevelSaver levelSaver = GameObject.FindAnyObjectByType<LevelSaver>();
         levelSaver.SetDifficulty(Difficulty.Easy);
@@ -94,11 +95,9 @@ public class LevelLoaderTests
         arrangementGenerator.GenerateArrangement(Difficulty.Easy);
         yield return null;
 
-        int turn = levelSaver.TurnCounter.getTurnCounter();
-        int score = levelSaver.Score.getScore();
-        float timeRemaining = levelSaver.Timer.GetTime();
-        yield return null;
-
+        string turn = turnDisplay.gameObject.GetComponent<TextMeshProUGUI>().text;
+        string score = scoreDisplay.gameObject.GetComponent<TextMeshProUGUI>().text;
+        string timeRemaining = timerDisplay.gameObject.GetComponent<TextMeshProUGUI>().text;
         levelSaver.SaveLevel();
         
         List<CardView> cardViews = getCardViewsFromArrangement(arrangementGenerator.ArrangementParent);
@@ -115,9 +114,9 @@ public class LevelLoaderTests
 
         //Then
         spriteSameForSameID(idSpritePairs, arrangementGenerator.ArrangementParent);
-        Assert.AreEqual(turn, levelLoader.turnCounter.getTurnCounter());
-        Assert.AreEqual(score, levelSaver.Score.getScore());
-        Assert.AreEqual(timeRemaining, levelSaver.Timer.GetTime(), 0.001f);
+        Assert.AreEqual(turn, turnDisplay.gameObject.GetComponent<TextMeshProUGUI>().text);
+        Assert.AreEqual(score, scoreDisplay.gameObject.GetComponent<TextMeshProUGUI>().text);
+        Assert.AreEqual(timeRemaining, timerDisplay.gameObject.GetComponent<TextMeshProUGUI>().text);
     }
 
     private List<CardView> getCardViewsFromArrangement(Transform arrangement)

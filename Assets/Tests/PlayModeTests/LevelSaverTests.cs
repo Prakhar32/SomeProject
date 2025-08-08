@@ -33,7 +33,7 @@ public class LevelSaverTests
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
         LevelSaver levelSaver = g.AddComponent<LevelSaver>();
-        levelSaver.ArrangementParent = new GameObject().transform;
+        levelSaver.SetDependencies(new GameObject().transform, null, null, null);
         yield return null;
 
         Assert.IsTrue(levelSaver == null);
@@ -45,8 +45,7 @@ public class LevelSaverTests
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
         LevelSaver levelSaver = g.AddComponent<LevelSaver>();
-        levelSaver.ArrangementParent = new GameObject().transform;
-        levelSaver.Score = new Score(new CardMatcher());
+        levelSaver.SetDependencies(new GameObject().transform, new Score(new CardMatcher()), null, null);
         yield return null;
 
         Assert.IsTrue(levelSaver == null);
@@ -59,9 +58,7 @@ public class LevelSaverTests
         CardMatcher matcher = new CardMatcher();
         GameObject g = new GameObject();
         LevelSaver levelSaver = g.AddComponent<LevelSaver>();
-        levelSaver.ArrangementParent = new GameObject().transform;
-        levelSaver.Score = new Score(matcher);
-        levelSaver.TurnCounter = new TurnCounter(matcher);
+        levelSaver.SetDependencies(new GameObject().transform, new Score(matcher), new TurnCounter(matcher), null);
 
         yield return null;
 
@@ -79,7 +76,6 @@ public class LevelSaverTests
 
         ArrangementGenerator arrangementGenerator =
             GameObject.FindGameObjectWithTag(Constants.ArrangementGeneratorTag).GetComponent<ArrangementGenerator>();
-        levelSaver.ArrangementParent = arrangementGenerator.ArrangementParent;
         yield return null;
 
         arrangementGenerator.GenerateArrangement(Difficulty.Easy);

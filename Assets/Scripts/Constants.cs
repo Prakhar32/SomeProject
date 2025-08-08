@@ -26,6 +26,8 @@ public class Constants
 
     public const string GammeSceneName = "GameScene";
     public const string ArrangementGeneratorTag = "Arrangement Generator";
+    public const string GamePanelTag = "Game Panel";
+    public const string DifficultySelectionPanelTag = "Difficulty Selection";
 }
 
 public enum Difficulty

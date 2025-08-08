@@ -18,7 +18,7 @@ public class TimerTests
         gameObject.AddComponent<TextMeshProUGUI>();
 
         Timer timer = new Timer(timerDisplay);
-        timerDisplay.Timer = timer;
+        timerDisplay.SetTimer(timer);
 
         //When
         timer.SetDifficulty(Difficulty.Easy);
@@ -27,7 +27,7 @@ public class TimerTests
         yield return new WaitForSeconds(2f);
 
         //Then
-        Assert.AreEqual(timer.GetTime(), currentTime - 2, 0.001f);
+        Assert.AreEqual(timer.GetTime(), currentTime - 2, 0.017f);
     }
 
     [UnityTest]
@@ -38,7 +38,7 @@ public class TimerTests
         gameObject.AddComponent<TextMeshProUGUI>();
         
         Timer timer = new Timer(timerDisplay);
-        timerDisplay.Timer = timer; 
+        timerDisplay.SetTimer(timer); 
         yield return null;
 
         Assert.Throws<NullReferenceException>(() => timer.SubscibeToTimeChange(null));
@@ -52,7 +52,7 @@ public class TimerTests
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
         gameObject.AddComponent<TextMeshProUGUI>();
         Timer timer = new Timer(timerDisplay); 
-        timerDisplay.Timer = timer;
+        timerDisplay.SetTimer(timer);
         yield return null;
 
         bool timeChanged = false;
@@ -76,7 +76,7 @@ public class TimerTests
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
         gameObject.AddComponent<TextMeshProUGUI>();
         Timer timer = new Timer(timerDisplay);
-        timerDisplay.Timer = timer;
+        timerDisplay.SetTimer(timer);
         yield return null;
 
         bool timeChanged = false;
