@@ -572,7 +572,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 353744217}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 871809037}
+        m_TargetAssemblyTypeName: DifficultySettor, ScriptsAssembly
+        m_MethodName: SetDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1883177296}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &353744217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1198,29 +1222,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 871809036}
-  - component: {fileID: 871809035}
+  - component: {fileID: 871809037}
   m_Layer: 0
-  m_Name: GameStateMachine
+  m_Name: Difficulty Selection
   m_TagString: Undefined
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &871809035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 871809034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3d8b461760c3bf4698f06d5490f3f22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DifficultySelectionPanel: {fileID: 2011938624}
-  GamePanel: {fileID: 1499947726}
-  ArrangementGenerator: {fileID: 385147404}
 --- !u!4 &871809036
 Transform:
   m_ObjectHideFlags: 0
@@ -1236,6 +1245,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &871809037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871809034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16b24e13a54a7924b83912c9cd75f10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &896393066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,7 +1456,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 957348702}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 871809037}
+        m_TargetAssemblyTypeName: DifficultySettor, ScriptsAssembly
+        m_MethodName: SetDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1883177296}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &957348702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1680,6 +1725,7 @@ MonoBehaviour:
   scoreDisplay: {fileID: 1886380535}
   turnCounterDisplay: {fileID: 9099124}
   timerDisplay: {fileID: 656614937}
+  difficultySettor: {fileID: 871809037}
   levelLoader: {fileID: 1542042632}
   levelSaver: {fileID: 2029402601}
 --- !u!4 &1170097615
@@ -2604,7 +2650,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1958085932}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 871809037}
+        m_TargetAssemblyTypeName: DifficultySettor, ScriptsAssembly
+        m_MethodName: SetDifficulty
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1883177296}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1958085932
 MonoBehaviour:
   m_ObjectHideFlags: 0

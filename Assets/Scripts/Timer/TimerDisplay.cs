@@ -25,12 +25,26 @@ public class TimerDisplay : MonoBehaviour
             throw new MissingReferenceException("Timer is not assigned.");
         }
 
-        _timer.SubscibeToTimeChange(displayTime);
+        _timer.SubscribeToTimeStartEvent(startDisplay);
+        _timer.SubscibeToTimeOverEvent(stopDisplay);
     }
 
-    private void displayTime()
+    private void startDisplay() 
     {
-        _timerText.text = string.Format("Time Remaining : {0}", (int)_timer.GetTime());
+        StartCoroutine(display());
+    }
+    private void stopDisplay() 
+    {  
+        StopCoroutine(display()); 
+    }
+
+    private IEnumerator display()
+    {
+        while (true)
+        {
+            _timerText.text = string.Format("Time Remaining : {0}", (int)_timer.GetTime());
+            yield return null;
+        }
     }
 }
 

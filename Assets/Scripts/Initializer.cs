@@ -8,6 +8,7 @@ public class Initializer : MonoBehaviour
     public ScoreDisplay scoreDisplay;
     public TurnCounterDisplay turnCounterDisplay;
     public TimerDisplay timerDisplay;
+    public DifficultySettor difficultySettor;
 
     public LevelLoader levelLoader;
     public LevelSaver levelSaver;
@@ -22,7 +23,7 @@ public class Initializer : MonoBehaviour
         _cardMatcher = new CardMatcher();
         _score = new Score(_cardMatcher);
         _turnCounter = new TurnCounter(_cardMatcher);
-        _timer = new Timer(timerDisplay);
+        _timer = new Timer(timerDisplay, difficultySettor);
 
         arrangementGenerator.CardMatcher = _cardMatcher;
         scoreDisplay.SetScore(_score);
