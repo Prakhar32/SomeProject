@@ -11,7 +11,7 @@ public class DifficultySettor : MonoBehaviour
 
     public void SetDifficulty(int difficulty)
     {
-        if (!Enum.IsDefined(typeof(Difficulty), 3))
+        if (!Enum.IsDefined(typeof(Difficulty), difficulty))
             throw new InvalidOperationException("Invalid Difficulty");
 
         _difficulty = (Difficulty)difficulty;
