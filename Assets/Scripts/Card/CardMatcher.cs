@@ -58,4 +58,11 @@ public class CardMatcher
 
         _previousCard = null;
     }
+
+    internal void ResetMatcher()
+    {
+        _previousCard = null;
+        _successfulMatchEvent.RemoveAllListeners();
+        _unsuccessfulMatchEvent.RemoveAllListeners();
+    }
 }

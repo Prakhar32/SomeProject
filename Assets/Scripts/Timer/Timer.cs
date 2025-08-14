@@ -6,31 +6,19 @@ using UnityEngine.Events;
 public class Timer
 {
     private MonoBehaviour _mono;
-    private DifficultySettor _difficultySettor;
 
     private UnityEvent _timeOverEvent;
     private UnityEvent _timerStartedEvent;
     private float _currentTime;
 
-    public Timer(MonoBehaviour mono, DifficultySettor difficultySettor)
+    public Timer(MonoBehaviour mono)
     {
         if (mono == null)
             throw new NullReferenceException("Monobehaviour cannot be null");
 
-        if (difficultySettor == null)
-            throw new NullReferenceException("Difficulty Settor cannot be null");
-
         _mono = mono;
-        _difficultySettor = difficultySettor;
-
         _timeOverEvent = new UnityEvent();
         _timerStartedEvent = new UnityEvent();
-        _difficultySettor.SubscribeToDifficultyChange(SetDifficulty);
-    }
-
-    private void SetDifficulty()
-    {
-        SetTimer(Constants.TimeForDifficulty[_difficultySettor.GetDifficulty()]);
     }
 
     public void SetTimer(float time)

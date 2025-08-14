@@ -8,20 +8,16 @@ public class LevelSaver : MonoBehaviour
     private Score _score;
     private TurnCounter _turnCounter;
     private Timer _timer;
-
-    private Difficulty _difficulty;
+    private DifficultySettor _difficultySettor;
     
-    public void SetDependencies(Transform ArrangementParent, Score score, TurnCounter turnCounter, Timer timer)
+    public void SetDependencies(Transform ArrangementParent, Score score, 
+        TurnCounter turnCounter, Timer timer, DifficultySettor difficultySettor)
     {
         _arrangementParent = ArrangementParent;
         _score = score;
         _turnCounter = turnCounter;
         _timer = timer;
-    }
-
-    public void SetDifficulty(Difficulty difficulty)
-    {
-        _difficulty = difficulty;
+        _difficultySettor = difficultySettor;
     }
 
     void Start()
@@ -49,13 +45,19 @@ public class LevelSaver : MonoBehaviour
             Destroy(this);
             throw new MissingReferenceException("Timer cannot be null");
         }
+
+        if(_difficultySettor == null)
+        {
+            Destroy(this);
+            throw new MissingReferenceException("DifficultySettor cannot be null");
+        }
     }
 
     public void SaveLevel()
     {
         List<CardView> cardViews = getAllCards();
         Dictionary<int, CardMemeto> mementos = GetMementos(cardViews);
-        DataSaver.SaveData(_difficulty, mementos, _score.getScore(), _turnCounter.getTurnCounter(), (int)_timer.GetTime());
+        DataSaver.SaveData(_difficultySettor.GetDifficulty(), mementos, _score.getScore(), _turnCounter.getTurnCounter(), (int)_timer.GetTime());
     }
 
     private Dictionary<int, CardMemeto> GetMementos(List<CardView> cardViews)

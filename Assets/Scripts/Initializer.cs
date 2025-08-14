@@ -13,6 +13,8 @@ public class Initializer : MonoBehaviour
     public LevelLoader levelLoader;
     public LevelSaver levelSaver;
 
+    public GameStart _gameStart;
+
     private CardMatcher _cardMatcher;
     private Score _score;
     private TurnCounter _turnCounter;
@@ -23,14 +25,16 @@ public class Initializer : MonoBehaviour
         _cardMatcher = new CardMatcher();
         _score = new Score(_cardMatcher);
         _turnCounter = new TurnCounter(_cardMatcher);
-        _timer = new Timer(timerDisplay, difficultySettor);
+        _timer = new Timer(timerDisplay);
 
         arrangementGenerator.CardMatcher = _cardMatcher;
         scoreDisplay.SetScore(_score);
         turnCounterDisplay.SetTurnCounter(_turnCounter);
         timerDisplay.SetTimer(_timer);
 
-        levelLoader.SetDependencies(arrangementGenerator, _score, _turnCounter, _timer);
-        levelSaver.SetDependencies(arrangementGenerator.transform, _score, _turnCounter, _timer);
+        levelLoader.SetDependencies(arrangementGenerator, _score, _turnCounter, _timer, difficultySettor);
+        levelSaver.SetDependencies(arrangementGenerator.transform, _score, _turnCounter, _timer, difficultySettor);
+
+        _gameStart.setDependency(arrangementGenerator, _score, _turnCounter, difficultySettor, _timer);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
@@ -14,6 +15,7 @@ public class ArrangementGenerator : MonoBehaviour
     public Sprite FaceDownSprite;
 
     private CardSetter _cardSetter;
+    private ContentSizeFitter _contentSizeFitter;
 
     void Start()
     {
@@ -53,12 +55,20 @@ public class ArrangementGenerator : MonoBehaviour
             throw new NullReferenceException("FaceDownSprite cannot be null");
         }
 
+        _contentSizeFitter = GetComponent<ContentSizeFitter>();
+        if (_contentSizeFitter == null)
+        {
+            Destroy(this);
+            throw new MissingComponentException("ContentSizeFitter not present");
+        }
+
         _cardSetter = new CardSetter(CardSprites);
     }
 
     public void GenerateArrangement(Difficulty difficulty)
     {
         ResetArrangement();
+        CardMatcher.ResetMatcher();
         setCellSize(difficulty);
         setCellSpacing(difficulty);
 
@@ -96,7 +106,8 @@ public class ArrangementGenerator : MonoBehaviour
         }
 
         _cardSetter.SetupCards(cards);
-        LayoutGroup.enabled = false;
+        _contentSizeFitter.enabled = true;
+        StartCoroutine(disableAfterSomeTime());
     }
 
     public void ResetArrangement()
@@ -105,5 +116,12 @@ public class ArrangementGenerator : MonoBehaviour
         {
             Destroy(ArrangementParent.GetChild(i).gameObject);
         }
+    }
+
+    private IEnumerator disableAfterSomeTime()
+    {
+        yield return null;
+        _contentSizeFitter.enabled = false;
+        LayoutGroup.enabled = false;
     }
 }

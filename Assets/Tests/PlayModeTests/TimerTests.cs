@@ -27,7 +27,7 @@ public class TimerTests
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
         gameObject.AddComponent<TextMeshProUGUI>();
 
-        Timer timer = new Timer(timerDisplay, GameObject.FindObjectOfType<DifficultySettor>());
+        Timer timer = new Timer(timerDisplay);
         timerDisplay.SetTimer(timer);
 
         //When
@@ -47,7 +47,7 @@ public class TimerTests
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
         gameObject.AddComponent<TextMeshProUGUI>();
 
-        Timer timer = new Timer(timerDisplay, GameObject.FindObjectOfType<DifficultySettor>());
+        Timer timer = new Timer(timerDisplay);
         timerDisplay.SetTimer(timer); 
         yield return null;
 
@@ -61,7 +61,7 @@ public class TimerTests
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
         gameObject.AddComponent<TextMeshProUGUI>();
 
-        Timer timer = new Timer(timerDisplay, GameObject.FindObjectOfType<DifficultySettor>());
+        Timer timer = new Timer(timerDisplay);
         timerDisplay.SetTimer(timer);
         yield return null;
 
@@ -75,7 +75,7 @@ public class TimerTests
         GameObject gameObject = new GameObject();
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
         gameObject.AddComponent<TextMeshProUGUI>();
-        Timer timer = new Timer(timerDisplay, GameObject.FindObjectOfType<DifficultySettor>());
+        Timer timer = new Timer(timerDisplay);
         timerDisplay.SetTimer(timer);
         yield return null;
 
@@ -99,7 +99,7 @@ public class TimerTests
         GameObject gameObject = new GameObject();
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
         gameObject.AddComponent<TextMeshProUGUI>();
-        Timer timer = new Timer(timerDisplay, GameObject.FindObjectOfType<DifficultySettor>());
+        Timer timer = new Timer(timerDisplay);
         timerDisplay.SetTimer(timer);
         yield return null;
 
@@ -123,7 +123,7 @@ public class TimerTests
         GameObject gameObject = new GameObject();
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
         gameObject.AddComponent<TextMeshProUGUI>();
-        Timer timer = new Timer(timerDisplay, GameObject.FindObjectOfType<DifficultySettor>());
+        Timer timer = new Timer(timerDisplay);
         timerDisplay.SetTimer(timer);
         yield return null;
 
@@ -148,7 +148,7 @@ public class TimerTests
         GameObject gameObject = new GameObject();
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
         gameObject.AddComponent<TextMeshProUGUI>();
-        Timer timer = new Timer(timerDisplay, GameObject.FindObjectOfType<DifficultySettor>());
+        Timer timer = new Timer(timerDisplay);
         timerDisplay.SetTimer(timer);
         yield return null;
 
@@ -172,7 +172,7 @@ public class TimerTests
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
         gameObject.AddComponent<TextMeshProUGUI>();
 
-        Timer timer = new Timer(timerDisplay, GameObject.FindObjectOfType<DifficultySettor>());
+        Timer timer = new Timer(timerDisplay);
         timerDisplay.SetTimer(timer);
         yield return null;
 
@@ -186,7 +186,7 @@ public class TimerTests
         GameObject gameObject = new GameObject();
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
         gameObject.AddComponent<TextMeshProUGUI>();
-        Timer timer = new Timer(timerDisplay, GameObject.FindObjectOfType<DifficultySettor>());
+        Timer timer = new Timer(timerDisplay);
         timerDisplay.SetTimer(timer);
         yield return null;
 
@@ -211,7 +211,7 @@ public class TimerTests
         TimerDisplay timerDisplay = gameObject.AddComponent<TimerDisplay>();
         gameObject.AddComponent<TextMeshProUGUI>();
 
-        Timer timer = new Timer(timerDisplay, GameObject.FindObjectOfType<DifficultySettor>());
+        Timer timer = new Timer(timerDisplay);
         timerDisplay.SetTimer(timer);
         yield return null;
 

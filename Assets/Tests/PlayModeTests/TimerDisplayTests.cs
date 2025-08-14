@@ -46,7 +46,7 @@ public class TimerDisplayTests
         GameObject g = new GameObject();
         g.AddComponent<TextMeshProUGUI>();
         TimerDisplay display = g.AddComponent<TimerDisplay>();
-        Timer timer = new Timer(display, GameObject.FindObjectOfType<DifficultySettor>());
+        Timer timer = new Timer(display);
         display.SetTimer(timer);
         yield return null;
 
@@ -58,10 +58,10 @@ public class TimerDisplayTests
         //Ignoring it for now as there is no impact on user experience.
 
         int currentTime = (int)timer.GetTime();
-        Assert.AreEqual(string.Format("Time Remaining : {0}", currentTime), g.GetComponent<TextMeshProUGUI>().text);
+        Assert.AreEqual(string.Format("Time : {0}", currentTime), g.GetComponent<TextMeshProUGUI>().text);
         yield return new WaitForSeconds(1f);
         
         //Then
-        Assert.AreEqual(string.Format("Time Remaining : {0}", currentTime - 1), g.GetComponent<TextMeshProUGUI>().text);
+        Assert.AreEqual(string.Format("Time : {0}", currentTime - 1), g.GetComponent<TextMeshProUGUI>().text);
     }
 }

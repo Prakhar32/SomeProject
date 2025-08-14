@@ -38,7 +38,7 @@ public class LevelLoaderTests
         LevelLoader levelLoader = g.AddComponent<LevelLoader>();
         ArrangementGenerator arrangementGenerator = GameObject.FindObjectOfType<ArrangementGenerator>();
         
-        levelLoader.SetDependencies(arrangementGenerator, null, null, null);
+        levelLoader.SetDependencies(arrangementGenerator, null, null, null, null);
         yield return null;
 
         Assert.IsTrue(levelLoader == null);
@@ -52,7 +52,7 @@ public class LevelLoaderTests
         LevelLoader levelLoader = g.AddComponent<LevelLoader>();
         ArrangementGenerator arrangementGenerator = GameObject.FindObjectOfType<ArrangementGenerator>();
 
-        levelLoader.SetDependencies(arrangementGenerator, new Score(new CardMatcher()), null, null);
+        levelLoader.SetDependencies(arrangementGenerator, new Score(new CardMatcher()), null, null, null);
         yield return null;
 
         Assert.IsTrue(levelLoader == null);
@@ -67,8 +67,24 @@ public class LevelLoaderTests
         LevelLoader levelLoader = g.AddComponent<LevelLoader>();
         ArrangementGenerator arrangementGenerator = GameObject.FindObjectOfType<ArrangementGenerator>();
 
-        levelLoader.SetDependencies(arrangementGenerator, new Score(cardMatcher), new TurnCounter(cardMatcher), null);
+        levelLoader.SetDependencies(arrangementGenerator, new Score(cardMatcher), new TurnCounter(cardMatcher), null, null);
        yield return null;
+
+        Assert.IsTrue(levelLoader == null);
+    }
+
+    [UnityTest]
+    public IEnumerator DifficultySettorCannotbeNull()
+    {
+        LogAssert.ignoreFailingMessages = true;
+        CardMatcher cardMatcher = new CardMatcher();
+        GameObject g = new GameObject();
+        LevelLoader levelLoader = g.AddComponent<LevelLoader>();
+        ArrangementGenerator arrangementGenerator = GameObject.FindObjectOfType<ArrangementGenerator>();
+
+        levelLoader.SetDependencies(arrangementGenerator, new Score(cardMatcher), 
+            new TurnCounter(cardMatcher), new Timer(GameObject.FindAnyObjectByType<TimerDisplay>()), null);
+        yield return null;
 
         Assert.IsTrue(levelLoader == null);
     }
@@ -82,8 +98,9 @@ public class LevelLoaderTests
         ScoreDisplay scoreDisplay = GameObject.FindObjectOfType<ScoreDisplay>();
         TimerDisplay timerDisplay = GameObject.FindObjectOfType<TimerDisplay>();
 
+        DifficultySettor difficultySettor = GameObject.FindObjectOfType<DifficultySettor>();
+        difficultySettor.SetDifficulty((int)Difficulty.Easy);
         LevelSaver levelSaver = GameObject.FindAnyObjectByType<LevelSaver>();
-        levelSaver.SetDifficulty(Difficulty.Easy);
 
         LevelLoader levelLoader = GameObject.FindAnyObjectByType<LevelLoader>();
         yield return null;

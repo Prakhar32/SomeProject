@@ -42,7 +42,7 @@ public class TimerDisplay : MonoBehaviour
     {
         while (true)
         {
-            _timerText.text = string.Format("Time Remaining : {0}", (int)_timer.GetTime());
+            _timerText.text = string.Format("Time : {0}", (int)_timer.GetTime());
             yield return null;
         }
     }

@@ -33,7 +33,7 @@ public class LevelSaverTests
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
         LevelSaver levelSaver = g.AddComponent<LevelSaver>();
-        levelSaver.SetDependencies(new GameObject().transform, null, null, null);
+        levelSaver.SetDependencies(new GameObject().transform, null, null, null, null);
         yield return null;
 
         Assert.IsTrue(levelSaver == null);
@@ -45,7 +45,7 @@ public class LevelSaverTests
         LogAssert.ignoreFailingMessages = true;
         GameObject g = new GameObject();
         LevelSaver levelSaver = g.AddComponent<LevelSaver>();
-        levelSaver.SetDependencies(new GameObject().transform, new Score(new CardMatcher()), null, null);
+        levelSaver.SetDependencies(new GameObject().transform, new Score(new CardMatcher()), null, null, null);
         yield return null;
 
         Assert.IsTrue(levelSaver == null);
@@ -58,10 +58,24 @@ public class LevelSaverTests
         CardMatcher matcher = new CardMatcher();
         GameObject g = new GameObject();
         LevelSaver levelSaver = g.AddComponent<LevelSaver>();
-        levelSaver.SetDependencies(new GameObject().transform, new Score(matcher), new TurnCounter(matcher), null);
+        levelSaver.SetDependencies(new GameObject().transform, new Score(matcher), new TurnCounter(matcher), null, null);
 
         yield return null;
 
+        Assert.IsTrue(levelSaver == null);
+    }
+
+    [UnityTest]
+    public IEnumerator DifficultySettorCannotBeNull()
+    {
+        LogAssert.ignoreFailingMessages = true;
+        CardMatcher matcher = new CardMatcher();
+        Timer timer = new Timer(GameObject.FindFirstObjectByType<TimerDisplay>());
+        GameObject g = new GameObject();
+        LevelSaver levelSaver = g.AddComponent<LevelSaver>();
+        levelSaver.SetDependencies(new GameObject().transform, new Score(matcher), new TurnCounter(matcher), timer, null);
+
+        yield return null;
         Assert.IsTrue(levelSaver == null);
     }
 
@@ -71,8 +85,9 @@ public class LevelSaverTests
         //Given
         File.Delete(Constants.FilePath);
         
+        DifficultySettor difficultySettor = GameObject.FindObjectOfType<DifficultySettor>();
+        difficultySettor.SetDifficulty((int)Difficulty.Easy);
         LevelSaver levelSaver = GameObject.FindObjectOfType<LevelSaver>();
-        levelSaver.SetDifficulty(Difficulty.Easy);
 
         ArrangementGenerator arrangementGenerator = GameObject.FindObjectOfType<ArrangementGenerator>();
         yield return null;

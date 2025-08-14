@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +9,16 @@ public class LevelLoader : MonoBehaviour
     private Score _score;
     private TurnCounter _turnCounter;
     private Timer _timer;
+    private DifficultySettor _difficultySettor;
 
-    public void SetDependencies(ArrangementGenerator Generator, Score score, TurnCounter turnCounter, Timer timer)
+    public void SetDependencies(ArrangementGenerator Generator, Score score, 
+        TurnCounter turnCounter, Timer timer, DifficultySettor difficultySettor)
     {
         _generator = Generator;
         _score = score;
         _turnCounter = turnCounter;
         _timer = timer;
+        _difficultySettor = difficultySettor;
     }
 
     private void Start()
@@ -33,19 +37,25 @@ public class LevelLoader : MonoBehaviour
         if (_score == null)
         {
             Destroy(this);
-            throw new MissingReferenceException("Score cannot be null");
+            throw new NullReferenceException("Score cannot be null");
         }
 
         if (_turnCounter == null)
         {
             Destroy(this);
-            throw new MissingReferenceException("Turn Counter cannot be null");
+            throw new NullReferenceException("Turn Counter cannot be null");
         }
 
         if (_timer == null)
         {
             Destroy(this);
-            throw new MissingReferenceException("Timer cannot be null");
+            throw new NullReferenceException("Timer cannot be null");
+        }
+
+        if (_difficultySettor == null)
+        {
+            Destroy(this);
+            throw new NullReferenceException("DifficultySettor cannot be null");
         }
     }
 
@@ -56,6 +66,7 @@ public class LevelLoader : MonoBehaviour
         _score.setScore(data.Score);
         _turnCounter.setTurnCounter(data.Turn);
         _timer.SetTimer(data.TimeRemaining);
+        _difficultySettor.SetDifficulty((int)data.Difficulty);
 
         StartCoroutine(assignData(data.CardData));
     }
