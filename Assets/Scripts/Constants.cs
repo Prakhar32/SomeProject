@@ -25,6 +25,12 @@ public class Constants
     };
 
     public const string GammeSceneName = "GameScene";
+
+    public const string PathToAudio = "Audio/";
+    public const string CorrectMatchAudio = "correct_choice";
+    public const string IncorrectMatchAudio = "wrong_choice";
+    public const string WinAudio = "win";
+    public const string GameOverAudio = "gameover";
 }
 
 public enum Difficulty
