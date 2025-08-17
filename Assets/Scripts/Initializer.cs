@@ -13,7 +13,8 @@ public class Initializer : MonoBehaviour
     public LevelLoader levelLoader;
     public LevelSaver levelSaver;
 
-    public GameStart _gameStart;
+    public GameStartState _gameStart;
+    public GameStateMachine _stateMachine;
 
     private CardMatcher _cardMatcher;
     private Score _score;
@@ -35,6 +36,6 @@ public class Initializer : MonoBehaviour
         levelLoader.SetDependencies(arrangementGenerator, _score, _turnCounter, _timer, difficultySettor);
         levelSaver.SetDependencies(arrangementGenerator.transform, _score, _turnCounter, _timer, difficultySettor);
 
-        _gameStart.setDependency(arrangementGenerator, _score, _turnCounter, difficultySettor, _timer);
+        _stateMachine.SetDependencies(arrangementGenerator, _cardMatcher, _score, _turnCounter, _timer, difficultySettor);
     }
 }

@@ -585,18 +585,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2011938624}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &353744217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1470,18 +1458,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2011938624}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &957348702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1729,7 +1705,7 @@ MonoBehaviour:
   difficultySettor: {fileID: 871809037}
   levelLoader: {fileID: 1542042632}
   levelSaver: {fileID: 2029402601}
-  _gameStart: {fileID: 1625450325}
+  _stateMachine: {fileID: 1625450327}
 --- !u!4 &1170097615
 Transform:
   m_ObjectHideFlags: 0
@@ -1890,6 +1866,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1467622563}
   - component: {fileID: 1467622562}
+  - component: {fileID: 1467622564}
   m_Layer: 0
   m_Name: Audio Source
   m_TagString: Untagged
@@ -2008,6 +1985,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1467622564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467622561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4471c372ed9acf458f670f68fe879d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1499947726
 GameObject:
   m_ObjectHideFlags: 0
@@ -2356,26 +2345,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1625450326}
-  - component: {fileID: 1625450325}
+  - component: {fileID: 1625450327}
   m_Layer: 0
-  m_Name: Game
+  m_Name: StartGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1625450325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1625450324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b896c2c1f25908c4f98c91488277aaae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1625450326
 Transform:
   m_ObjectHideFlags: 0
@@ -2391,6 +2368,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1625450327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625450324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d8b461760c3bf4698f06d5490f3f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DifficultySelectionPanel: {fileID: 2011938624}
+  GamePanel: {fileID: 1499947726}
+  AudioService: {fileID: 1467622564}
 --- !u!1 &1820535063
 GameObject:
   m_ObjectHideFlags: 0
@@ -2828,18 +2820,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: DifficultySettor, ScriptsAssembly
         m_MethodName: SetDifficulty
         m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2011938624}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
