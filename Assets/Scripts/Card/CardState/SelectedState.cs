@@ -26,15 +26,15 @@ internal class SelectedState : CardState
 
     private void CardMatched()
     {
-        _cardMatcher.UnsubscribeToSuccessfulMatch(CardMatched);
-        _cardMatcher.UnsubscribeToUnsuccessfulMatch(CardNotMatching);
+        _cardMatcher.UnsubscribefromSuccessfulMatch(CardMatched);
+        _cardMatcher.UnsubscribefromUnsuccessfulMatch(CardNotMatching);
         _cardStateMachine.SetState(_cardStateMachine.PauseBeforeDestructionState);
     }
 
     private void CardNotMatching()
     {
-        _cardMatcher.UnsubscribeToSuccessfulMatch(CardMatched);
-        _cardMatcher.UnsubscribeToUnsuccessfulMatch(CardNotMatching);
+        _cardMatcher.UnsubscribefromSuccessfulMatch(CardMatched);
+        _cardMatcher.UnsubscribefromUnsuccessfulMatch(CardNotMatching);
         _cardStateMachine.SetState(_cardStateMachine.PauseBeforeResetState);
     }
 }

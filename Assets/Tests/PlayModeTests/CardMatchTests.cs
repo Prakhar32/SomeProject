@@ -158,7 +158,7 @@ public class CardMatchTests
         yield return new WaitForSeconds(Constants.ViewTime);
         
         //When
-        cardMatcher.UnsubscribeToSuccessfulMatch(action);
+        cardMatcher.UnsubscribefromSuccessfulMatch(action);
         cardView1.Selected();
         cardView2.Selected();
         
@@ -203,7 +203,7 @@ public class CardMatchTests
         yield return new WaitForSeconds(Constants.ViewTime);
 
         //When
-        cardMatcher.UnsubscribeToUnsuccessfulMatch(action);
+        cardMatcher.UnsubscribefromUnsuccessfulMatch(action);
         cardView1.Selected();
         cardView2.Selected();
 
