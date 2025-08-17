@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 public class CardMatcher 
 {
@@ -17,20 +18,26 @@ public class CardMatcher
 
     public void SubscribeToSuccessfulMatch(UnityAction action)
     {
+        if (action == null)
+            throw new NullReferenceException("Null cannot subscribe to successful match event");
+
         _successfulMatchEvent.AddListener(action);
     }
 
-    public void UnsubscribeToSuccessfulMatch(UnityAction action)
+    public void UnsubscribefromSuccessfulMatch(UnityAction action)
     {
         _successfulMatchEvent.RemoveListener(action);
     }
 
     public void SubscribeToUnsuccessfulMatch(UnityAction action)
     {
+        if (action == null)
+            throw new NullReferenceException("Null cannot subscribe to unsuccessful match event");
+
         _unsuccessfulMatchEvent.AddListener(action);
     }
 
-    public void UnsubscribeToUnsuccessfulMatch(UnityAction action)
+    public void UnsubscribefromUnsuccessfulMatch(UnityAction action)
     {
         _unsuccessfulMatchEvent.RemoveListener(action);
     }
@@ -59,10 +66,8 @@ public class CardMatcher
         _previousCard = null;
     }
 
-    internal void ResetMatcher()
+    internal void ResetCardSelected()
     {
         _previousCard = null;
-        _successfulMatchEvent.RemoveAllListeners();
-        _unsuccessfulMatchEvent.RemoveAllListeners();
     }
 }

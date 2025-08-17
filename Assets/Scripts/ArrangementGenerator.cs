@@ -68,7 +68,7 @@ public class ArrangementGenerator : MonoBehaviour
     public void GenerateArrangement(Difficulty difficulty)
     {
         ResetArrangement();
-        CardMatcher.ResetMatcher();
+        CardMatcher.ResetCardSelected();
         setCellSize(difficulty);
         setCellSpacing(difficulty);
 
